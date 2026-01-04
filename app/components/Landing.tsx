@@ -2,7 +2,7 @@ import { signOut, useSession } from "next-auth/react";
 // import { useOpenTodo } from "@/app/context/IsTodoOpenContext";
 import Todos from "./Todos";
 import { User2 } from "lucide-react";
-import ShowNHideTodo from "./ShowNHideTodo";
+// import ShowNHideTodo from "./ShowNHideTodo";
 
 function Landing() {
   const { data: session } = useSession();
@@ -48,16 +48,17 @@ function Landing() {
                 Logout
               </button>
 
-              <div className="flex gap-2">
+              {/* <div className="flex gap-2">
                 <ShowNHideTodo />
-              </div>
+              </div> */}
             </div>
           </div>
 
           {/* bottom of the components */}
+        <Todos />
+
         </div>
 
-        <Todos />
       </div>
     </div>
   );
