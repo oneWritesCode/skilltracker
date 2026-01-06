@@ -8,6 +8,12 @@ import { BiCross, BiCut } from "react-icons/bi";
 type setSkillsType = {
   content: string;
 };
+type SkillsFromBackendType = {
+  id: string;
+  skillName: String;
+  userId: string;
+  createdAt: string;
+};
 
 export default function skills() {
   const [skills, setSkills] = useState<setSkillsType[]>([]);
@@ -15,27 +21,36 @@ export default function skills() {
   const [inputValue, setInputValue] = useState("");
   // const { isTodoOpen } = useOpenTodo();
 
+  const fetchedSkills = async () => {
+    const res = await fetch("/api/skills");
+    const data = await res.json();
+    console.log("here's the data :: ", data);
+    setSkills(
+      data.map((skill: SkillsFromBackendType) => ({
+        content: skill.skillName,
+        id: skill.id,
+      }))
+    );
+  };
+
   useEffect(() => {
-    setSkills([
-      ...skills,
-      {
-        content: "we will code today",
-      },
-      {
-        content: "we will code today",
-      },
-    ]);
+    fetchedSkills();
   }, []);
+
+  const saveTodoInDB = async () => {
+    const res = await fetch("api/skills", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ skillName: inputValue }),
+    });
+    const saved = await res.json();
+    setSkills((prev) => [saved, ...prev]);
+  };
 
   const addTodo = () => {
     if (!inputValue.trim()) return;
 
-    setSkills([
-      ...skills,
-      {
-        content: inputValue,
-      },
-    ]);
+    saveTodoInDB();
 
     setInputValue("");
     setShowInput(false);
@@ -55,13 +70,6 @@ export default function skills() {
               key={index}
               className="flex gap-4 items-center bg-white/10 p-2 rounded-xl"
             >
-              {/* <span
-                className={`${
-                  skill.isDone ? "bg-green-600" : "bg-red-600"
-                } w-5 h-5 rounded-full flex items-center justify-center`}
-              >
-                {skill.isDone ? "D" : "N"}
-              </span> */}
               {skill.content}
               <span
                 className={`w-5 h-5 rounded-full flex items-center justify-center text-xs cursor-pointer p-1 hover:bg-white/20`}
