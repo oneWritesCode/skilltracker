@@ -41,7 +41,7 @@ const Loader = ({ isLoading }: LoaderProps) => {
       `}
     >
        <span className="tracking-widest pb-10">
-         <div className="w-12 h-12 border-4 border-yellow-900/20 border-t-yellow-300 rounded-full animate-spin" />
+         <div className="w-12 h-12 border-4 border-yellow-900/20 border-t-white rounded-full animate-spin" />
         </span>
     </div>
   );
