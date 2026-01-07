@@ -7,6 +7,7 @@ import { BiCross, BiCut } from "react-icons/bi";
 
 type setSkillsType = {
   content: string;
+  id: string | any;
 };
 type SkillsFromBackendType = {
   id: string;
@@ -24,7 +25,6 @@ export default function skills() {
   const fetchedSkills = async () => {
     const res = await fetch("/api/skills");
     const data = await res.json();
-    console.log("here's the data :: ", data);
     setSkills(
       data.map((skill: SkillsFromBackendType) => ({
         content: skill.skillName,
@@ -32,6 +32,12 @@ export default function skills() {
       }))
     );
   };
+
+  async function deleteSkill({ id }: any) {
+    const res = await fetch(`api/skills/${id}`, { method: "DELETE" });
+    const data = await res.json();
+    console.log(data);
+  }
 
   useEffect(() => {
     fetchedSkills();
@@ -65,17 +71,18 @@ export default function skills() {
       skills you are learning:
       <div>
         <div className="mt-5 flex gap-4">
-          {skills.map((skill, index) => (
+          {skills.map((skill) => (
             <span
-              key={index}
+              key={skill.id}
               className="flex gap-4 items-center bg-white/10 p-2 rounded-xl"
             >
               {skill.content}
-              <span
+              <button
+                onClick={() => deleteSkill(skill.id)}
                 className={`w-5 h-5 rounded-full flex items-center justify-center text-xs cursor-pointer p-1 hover:bg-white/20`}
               >
                 x
-              </span>
+              </button>
             </span>
           ))}
         </div>
