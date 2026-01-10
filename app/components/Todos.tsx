@@ -1,13 +1,11 @@
 "use client";
 
 // import { useOpenTodo } from "@/app/context/IsTodoOpenContext";
-import { CrossIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { BiCross, BiCut } from "react-icons/bi";
 
 type setSkillsType = {
-  content: string;
-  id: string | any;
+  skillName: string;
+  id: string;
 };
 type SkillsFromBackendType = {
   id: string;
@@ -25,38 +23,53 @@ export default function skills() {
   const fetchedSkills = async () => {
     const res = await fetch("/api/skills");
     const data = await res.json();
+    console.log("here you go with the data", data);
     setSkills(
       data.map((skill: SkillsFromBackendType) => ({
-        content: skill.skillName,
+        skillName: skill.skillName,
         id: skill.id,
       }))
     );
   };
 
-  async function deleteSkill({ id }: any) {
+  async function deleteSkill(id: any) {
     const res = await fetch(`api/skills/${id}`, { method: "DELETE" });
-    const data = await res.json();
-    console.log(data);
+
+    if (!res.ok) {
+      console.error("Failed to delete");
+      return;
+    }
+
+    setSkills((prev) => prev.filter((skill) => skill.id !== id));
   }
 
   useEffect(() => {
     fetchedSkills();
   }, []);
 
-  const saveTodoInDB = async () => {
+  const saveSkillInDB = async () => {
     const res = await fetch("api/skills", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ skillName: inputValue }),
     });
+
+    if (!res.ok) {
+      console.error("Failed to delete");
+      return;
+    }
+
     const saved = await res.json();
-    setSkills((prev) => [saved, ...prev]);
+    setSkills((prev) => [
+      { skillName: saved.skillName, id: saved.id },
+      ...prev,
+    ]);
   };
 
-  const addTodo = () => {
+  const addSkill = () => {
     if (!inputValue.trim()) return;
 
-    saveTodoInDB();
+    saveSkillInDB();
 
     setInputValue("");
     setShowInput(false);
@@ -76,12 +89,12 @@ export default function skills() {
               key={skill.id}
               className="flex gap-4 items-center bg-white/10 p-2 rounded-xl"
             >
-              {skill.content}
+              {skill.skillName}
               <button
                 onClick={() => deleteSkill(skill.id)}
                 className={`w-5 h-5 rounded-full flex items-center justify-center text-xs cursor-pointer p-1 hover:bg-white/20`}
               >
-                x
+                {/* {skill.id} */}x
               </button>
             </span>
           ))}
@@ -97,7 +110,7 @@ export default function skills() {
               className="rounded-md border border-gray-400 py-1"
             />
             <button
-              onClick={addTodo}
+              onClick={addSkill}
               className="bg-blue-600 hover:bg-blue-700 cursor-pointer rounded px-4 py-1 uppercase font-bold"
             >
               Save
