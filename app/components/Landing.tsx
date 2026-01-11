@@ -2,6 +2,7 @@ import { signOut, useSession } from "next-auth/react";
 // import { useOpenTodo } from "@/app/context/IsTodoOpenContext";
 import Todos from "./Todos";
 import { User2 } from "lucide-react";
+import RedirectLinkBtn from "./RedirectLinkBtn";
 // import ShowNHideTodo from "./ShowNHideTodo";
 
 function Landing() {
@@ -13,7 +14,7 @@ function Landing() {
   // };
 
   return (
-    <div className="w-full min-h-screen bg-black text-white">
+    <div className="relative w-full min-h-screen bg-black text-white">
       <div className="px-10 py-4 flex w-full items-center gap-10 justify-center">
         <div className="w-4xl">
           {/* top of the component */}
@@ -47,18 +48,14 @@ function Landing() {
               >
                 Logout
               </button>
-
-              {/* <div className="flex gap-2">
-                <ShowNHideTodo />
-              </div> */}
             </div>
           </div>
-
-          {/* bottom of the components */}
-        <Todos />
-
+          <div>
+            {/* bottom of the components */}
+            <Todos />
+          </div>
+          <RedirectLinkBtn text="how's your day" link="/day" />
         </div>
-
       </div>
     </div>
   );
