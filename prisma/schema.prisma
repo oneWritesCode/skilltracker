@@ -16,6 +16,7 @@ model User {
   accounts Account[]
   sessions Session[]
   skills   Skill[]
+  journal  Journal[]
 }
 
 model Account {
@@ -54,4 +55,27 @@ model Skill {
   user User @relation(fields: [userId], references: [id])
 
   @@unique([skillName, userId])
+}
+
+model Journal {
+  id             String   @id @default(uuid())
+  userId         String
+  date           DateTime
+  journalContent String // what the user writes about the day
+  createdAt      DateTime @default(now())
+
+  user  User   @relation(fields: [userId], references: [id])
+  tasks Task[]
+
+  @@unique([userId, date]) // one journal per day per user
+}
+
+model Task {
+  id        String   @id @default(uuid())
+  journalId String
+  title     String
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  journal Journal @relation(fields: [journalId], references: [id])
 }

@@ -22,6 +22,7 @@ export async function GET() {
 // ADD a skill
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
+  
   if (!session?.user?.id) {
     return NextResponse.json([], { status: 401 });
   }

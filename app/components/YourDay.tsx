@@ -14,54 +14,18 @@ import { useEffect, useState } from "react";
 type Editor = {};
 
 type tasksDoneType = {
-  taskName: string;
-  isDone: boolean;
+  title: string;
+  completed: boolean;
 };
 
 export default function Editor() {
-  // saving data to database
-  const SaveToDb = async () => {
-    if (!editor) return;
-    const content = editor.getJSON().toString();
-
-    const res = await fetch("/api/journal", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        journalContent: content,
-        tasks: tasksDone,
-      }),
-    });
-    if (!res.ok) {
-      console.log("here you go with response from backend", res);
-    }
-  };
-
-  // fetching journaldata form backned
-  useEffect(() => {
-    const fetchedData = async () => {
-      const data = await fetch("api/journal").then((res) => res.json());
-      console.log(data);
-    };
-  }, []);
-
-  // logics and script for task component
   const [task, setTask] = useState<string>();
   const [tasksDone, setTasksDone] = useState<tasksDoneType[]>([]);
-
-  const addTask = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!task?.trim()) return;
-
-    setTasksDone((prev) => [{ taskName: task, isDone: true }, ...prev]);
-    setTask("");
-  };
+  // const [journalContent, setJournalContent] = useState<any>();
 
   // logics and configration for editor
   const defaultContent = `
-        <strong>You Can Write There About Your Day</strong>
+        <strong>You Can Write There Abouay</strong>
         <br />
         <br />
     `;
@@ -114,6 +78,73 @@ export default function Editor() {
     immediatelyRender: false,
   });
 
+  // saving data to database
+  const SaveToDb = async () => {
+    if (!editor) return;
+    let content = editor.getJSON();
+    content = JSON.stringify(content);
+    console.log(content);
+
+    const res = await fetch("/api/journal", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        journalContent: content,
+        tasks: tasksDone,
+      }),
+    });
+    if (!res.ok) {
+      console.log("here you go with response from backend", res);
+      return;
+    }
+    console.log("saved you entry of the day");
+  };
+
+  // fetching journaldata form backned
+  useEffect(() => {
+    if (!editor) return;
+
+    fetch("/api/journal/date")
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.exists) return;
+
+        console.log(data);
+
+        if (data.journal.tasks) {
+          setTasksDone(data.journal.tasks);
+        }
+
+        if (data.journal.journalContent) {
+          try {
+            const parsedContent = JSON.parse(data.journal.journalContent);
+            // content is the editor command to set content, not .content inside the data unless structure is recursive
+            // data.journal.journalContent is the whole doc schema
+            editor.commands.setContent(parsedContent);
+
+            // We can also update the local state if needed for other purposes,
+            // but strictly for the editor, setContent is enough.
+            // If you want to keep 'journalContent' state in sync:
+            // setJournalContent(parsedContent);
+          } catch (e) {
+            console.error("Error parsing journal content:", e);
+          }
+        }
+      })
+      .catch((err) => console.error("Failed to fetch journal", err));
+  }, [editor]);
+
+  // logics and script for task component
+  const addTask = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!task?.trim()) return;
+
+    setTasksDone((prev) => [{ title: task, completed: true }, ...prev]);
+    setTask("");
+  };
+
   return (
     <div className="w-full bg-black text-white min-h-screen flex items-center justify-center ovreflow-hidden flex-col p-4 overflow-hidden">
       <div className=" sm:min-w-2xl md:min-w-3xl xl:min-w-6xl">
@@ -141,8 +172,8 @@ export default function Editor() {
               key={idx}
               className="px-2 py-1 border- boder-gray-700 bg-white/10 rounded-md"
             >
-              {singleTask.taskName}
-              {singleTask.isDone}
+              {singleTask.title}
+              {singleTask.completed}
             </div>
           ))}
         </div>

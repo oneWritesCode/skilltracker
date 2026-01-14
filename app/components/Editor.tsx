@@ -11,7 +11,7 @@ import Image from "@tiptap/extension-image";
 import { Redo, Undo } from "lucide-react";
 
 type Editor = {
-    
+
 }
 
 export default function Editor() {
@@ -54,7 +54,7 @@ export default function Editor() {
         allowBase64: true,
       }),
       TextStyle,
-      Color,
+    //   Color,
       Highlight,
       FontSize,
       Heading.configure({
@@ -178,13 +178,13 @@ export default function Editor() {
           </select>
 
           {/* change text color */}
-          <input
+          {/* <input
             type="color"
             onInput={(e) =>
               editor.chain().focus().setColor(e.target.value).run()
             }
             className="h-7 w-7 text-sm cursor-pointer hover:bg-[var(--light-background)] border-white/50 "
-          />
+          /> */}
         </div>
 
         {/* <div className='inline-flex items-center hover:bg-red-700 font-bold hover:text-white transition-all justify-center rounded-xl bg-[var(--light-background)] gap-1 ml-3'>
