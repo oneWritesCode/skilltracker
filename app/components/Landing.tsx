@@ -4,6 +4,7 @@ import Todos from "./Todos";
 import { User2 } from "lucide-react";
 import RedirectLinkBtn from "./RedirectLinkBtn";
 // import ShowNHideTodo from "./ShowNHideTodo";
+import Graph from "./Graph";
 
 function Landing() {
   const { data: session } = useSession();
@@ -53,6 +54,7 @@ function Landing() {
           <div>
             {/* bottom of the components */}
             <Todos />
+            <Graph/>
           </div>
           <RedirectLinkBtn text="how's your day" link="/day" />
         </div>

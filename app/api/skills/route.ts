@@ -6,7 +6,7 @@ import { authOptions } from "@/app/lib/auth";
 // GET all skills
 export async function GET() {
   const session = await getServerSession(authOptions);
-  console.log("here is the session", session);
+  // console.log("here is the session", session);
   if (!session?.user?.id) {
     return NextResponse.json([], { status: 401 });
   }

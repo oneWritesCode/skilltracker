@@ -23,7 +23,7 @@ export default function skills() {
   const fetchedSkills = async () => {
     const res = await fetch("/api/skills");
     const data = await res.json();
-    console.log("here you go with the data", data);
+    // console.log("here you go with the data", data);
     setSkills(
       data.map((skill: SkillsFromBackendType) => ({
         skillName: skill.skillName,

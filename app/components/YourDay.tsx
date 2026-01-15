@@ -8,7 +8,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Highlight from "@tiptap/extension-highlight";
 import { FontSize } from "@/app/extensions/FontSize";
 import Image from "@tiptap/extension-image";
-import { Redo, Undo } from "lucide-react";
+import { Redo, Undo, Loader2, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type Editor = {};
@@ -21,6 +21,8 @@ type tasksDoneType = {
 export default function Editor() {
   const [task, setTask] = useState<string>();
   const [tasksDone, setTasksDone] = useState<tasksDoneType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   // const [journalContent, setJournalContent] = useState<any>();
 
   // logics and configration for editor
@@ -81,25 +83,35 @@ export default function Editor() {
   // saving data to database
   const SaveToDb = async () => {
     if (!editor) return;
+    setIsLoading(true);
     let content = editor.getJSON();
     content = JSON.stringify(content);
     console.log(content);
 
-    const res = await fetch("/api/journal", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        journalContent: content,
-        tasks: tasksDone,
-      }),
-    });
-    if (!res.ok) {
-      console.log("here you go with response from backend", res);
-      return;
+    try {
+      const res = await fetch("/api/journal", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          journalContent: content,
+          tasks: tasksDone,
+        }),
+      });
+
+      if (!res.ok) {
+        console.log("here you go with response from backend", res);
+        return;
+      }
+      console.log("saved you entry of the day");
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
+    } catch (error) {
+      console.error("Error saving journal:", error);
+    } finally {
+      setIsLoading(false);
     }
-    console.log("saved you entry of the day");
   };
 
   // fetching journaldata form backned
@@ -145,6 +157,10 @@ export default function Editor() {
     setTask("");
   };
 
+  const removeTask = (indexToRemove: number) => {
+    setTasksDone((prev) => prev.filter((_, idx) => idx !== indexToRemove));
+  };
+
   return (
     <div className="w-full bg-black text-white min-h-screen flex items-center justify-center ovreflow-hidden flex-col p-4 overflow-hidden">
       <div className=" sm:min-w-2xl md:min-w-3xl xl:min-w-6xl">
@@ -170,10 +186,15 @@ export default function Editor() {
           {tasksDone.map((singleTask, idx) => (
             <div
               key={idx}
-              className="px-2 py-1 border- boder-gray-700 bg-white/10 rounded-md"
+              className="px-2 py-1 border border-gray-700 bg-white/10 rounded-md flex items-center gap-2"
             >
-              {singleTask.title}
-              {singleTask.completed}
+              <span>{singleTask.title}</span>
+              <button
+                onClick={() => removeTask(idx)}
+                className="text-gray-400 hover:text-white cursor-pointer hover:bg-white/20 rounded-full p-0.5"
+              >
+                <X size={14} />
+              </button>
             </div>
           ))}
         </div>
@@ -275,12 +296,19 @@ export default function Editor() {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-end items-end mt-4">
+        <div className="w-full flex justify-end items-end mt-4 relative">
+          {showSuccess && (
+            <div className="absolute right-0 bottom-full mb-2 bg-green-500 text-white px-3 py-1 rounded-md text-sm font-medium animate-in fade-in slide-in-from-bottom-2">
+              Submitted!
+            </div>
+          )}
           <button
             onClick={SaveToDb}
-            className="px-4 py-1 rounded-md font-bold capitalize bg-blue-600 cursor-pointer"
+            disabled={isLoading}
+            className="px-4 py-1 rounded-md font-bold capitalize bg-blue-600 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
           >
-            submit
+            {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+            {isLoading ? "Saving..." : "submit"}
           </button>
         </div>
       </div>
