@@ -3,7 +3,7 @@ import { prisma } from "@/app/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/lib/auth";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -34,7 +34,7 @@ export async function GET() {
   });
 
   // Transform data to a map of date string -> completed count
-  const data = journals.map((journal) => ({
+  const data = journals.map((journal: any) => ({
     date: journal.date.toISOString().split("T")[0],
     count: journal.tasks.length,
   }));
