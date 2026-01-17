@@ -27,9 +27,14 @@ export default function Editor() {
 
   // logics and configration for editor
   const defaultContent = `
-        <strong>You Can Write There Abouay</strong>
-        <br />
-        <br />
+       <strong>You Can Write There About your day</strong>
+       <br />
+       <br />
+      - &nbsp; "What did you get up to today?"
+       <br />
+      - &nbsp; "How are you really feeling?"
+       <br />
+      - &nbsp; "What's been on your mind?" 
     `;
 
   const editor: Editor | any = useEditor({
@@ -197,11 +202,11 @@ export default function Editor() {
         <div className="bg-(--background-color) mt-10 text-gray-300 text-sm funnel-sans">
           <div className="relative w-full">
             <div className="absolute top-0 p-6 w-full flex items-center justify-center z-1000">
-              <div className="inline-flex items-center justify-center rounded-xl bg-[var(--light-background)] px-3 py-1 gap-1 mr-3">
+              <div className="inline-flex items-center justify-center rounded-xl bg-[--light-background] px-3 py-1 gap-1 mr-3">
                 {/* undo button */}
                 <button
                   onClick={() => editor.chain().focus().undo().run()}
-                  className="h-6 w-6 hover:bg-[var(--background-color)] flex items-center justify-center rounded-full cursor-pointer"
+                  className="h-6 w-6 hover:bg-[--background-color] flex items-center justify-center rounded-full cursor-pointer"
                 >
                   <Undo size={18} />
                 </button>
@@ -209,13 +214,13 @@ export default function Editor() {
                 {/* redo button */}
                 <button
                   onClick={() => editor.chain().focus().redo().run()}
-                  className="h-6 w-6 hover:bg-[var(--background-color)] flex items-center justify-center rounded-full cursor-pointer"
+                  className="h-6 w-6 hover:bg-[--background-color] flex items-center justify-center rounded-full cursor-pointer"
                 >
                   <Redo size={18} />
                 </button>
               </div>
 
-              <div className="inline-flex items-center justify-center rounded-xl bg-[var(--light-background)] px-3 py-1 gap-1">
+              <div className="inline-flex items-center justify-center rounded-xl bg-[--light-background] px-3 py-1 gap-1">
                 {/* bold  */}
                 <button
                   onClick={() => editor.chain().focus().toggleBold().run()}
