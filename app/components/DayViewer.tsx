@@ -98,7 +98,7 @@ export default function DayViewer({ date }: DayViewerProps) {
   }
 
   return (
-    <div className="w-full bg-black text-white min-h-screen flex items-center justify-center ovreflow-hidden flex-col p-4 overflow-hidden">
+    <div className="w-full bg-black text-white min-h-[70vh] flex items-center ovreflow-hidden flex-col p-4 overflow-hidden">
       <div className=" sm:min-w-2xl md:min-w-3xl xl:min-w-6xl">
         <div className="border border-gray-700 rounded-xl p-4 w-full flex items-center justify-between">
           <p className="capitalize">

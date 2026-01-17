@@ -34,7 +34,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { journalContent, tasks } = await req.json();
+  const { journalContent, tasks, date } = await req.json();
 
   if (!journalContent) {
     return NextResponse.json(
@@ -43,8 +43,13 @@ export async function POST(req: Request) {
     );
   }
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  let today;
+  if (date) {
+    today = new Date(date);
+  } else {
+    today = new Date();
+    today.setHours(0, 0, 0, 0);
+  }
 
   const journal = await prisma.journal.upsert({
     where: {
@@ -60,7 +65,7 @@ export async function POST(req: Request) {
         create: tasks.map((t: any) => ({
           title: t.title,
           completed: t.completed,
-        })),  
+        })),
       },
     },
     create: {

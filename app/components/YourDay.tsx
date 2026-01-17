@@ -97,6 +97,7 @@ export default function Editor() {
         body: JSON.stringify({
           journalContent: content,
           tasks: tasksDone,
+          date: new Date().toISOString().split("T")[0],
         }),
       });
 

@@ -16,15 +16,18 @@ export async function GET(
   const { date } = await params;
 
   // Create date from YYYY-MM-DD ensuring local midnight
-  const targetDate = new Date();
-  
+  // Create date from YYYY-MM-DD ensuring local midnight
+  let targetDate = new Date();
+
   if (date) {
-    const [year, month, day] = date.split('-').map(Number);
-    // Note: month is 0-indexed in JS Date
-    targetDate.setFullYear(year, month - 1, day);
+    targetDate = new Date(date);
   }
-  
-  targetDate.setHours(0, 0, 0, 0);
+
+  // No need to setHours(0,0,0,0) if date string is YYYY-MM-DD as it defaults to UTC midnight
+  // But if we want to be safe or if it has time components (unlikely for route param), we can leave it.
+  // However, `new Date("2026-01-15")` is UTC midnight.
+  // Our DB saves "2026-01-15T00:00:00.000Z".
+
   console.log("Querying for date:", targetDate);
 
   const journal = await prisma.journal.findUnique({

@@ -46,7 +46,7 @@ export default function Graph() {
   const currentDate = new Date(startDate);
   while (currentDate <= today) {
     days.push(currentDate.toISOString().split("T")[0]);
-    currentDate.setDate(currentDate.getDate() + 1);
+    currentDate.setDate(currentDate.getDate()+1);
   }
 
   // Calculate weeks for month labels
@@ -58,10 +58,10 @@ export default function Graph() {
 
   const getColor = (count: number) => {
     if (count === 0) return "bg-gray-900/10 border-gray-800/90";
-    if (count <= 2) return "bg-blue-900/50 border-blue-800";
-    if (count <= 4) return "bg-blue-900/70 border-blue-800";
-    if (count <= 6) return "bg-blue-900 border-blue-800";
-    return "bg-blue-300 border-blue-200";
+    if (count <= 2) return "bg-blue-900/30 border-blue-800";
+    if (count <= 4) return "bg-blue-900/50 border-blue-800";
+    if (count <= 6) return "bg-blue-900/70 border-blue-800";
+    return "bg-blue-900 border-blue-800";
   };
 
   const formatDate = (dateString: string) => {
