@@ -119,7 +119,8 @@ export default function Editor() {
   useEffect(() => {
     if (!editor) return;
 
-    fetch("/api/journal/date")
+    const date = new Date().toISOString().split("T")[0];
+    fetch(`/api/journal/${date}`)
       .then((res) => res.json())
       .then((data) => {
         if (!data.exists) return;
@@ -133,14 +134,7 @@ export default function Editor() {
         if (data.journal.journalContent) {
           try {
             const parsedContent = JSON.parse(data.journal.journalContent);
-            // content is the editor command to set content, not .content inside the data unless structure is recursive
-            // data.journal.journalContent is the whole doc schema
             editor.commands.setContent(parsedContent);
-
-            // We can also update the local state if needed for other purposes,
-            // but strictly for the editor, setContent is enough.
-            // If you want to keep 'journalContent' state in sync:
-            // setJournalContent(parsedContent);
           } catch (e) {
             console.error("Error parsing journal content:", e);
           }
