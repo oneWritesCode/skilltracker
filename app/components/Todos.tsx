@@ -77,24 +77,22 @@ export default function skills() {
 
   return (
     <div
-      className={`w-full my-4 p-2 borde-gray-600 rounded-xl transition-all duration-500 
-        // isTodoOpen ? "translate-x-100 rotate-20" : ""
-        `}
+      className={`w-full my-4 md:p-2`}
     >
       skills you are learning:
       <div>
-        <div className="mt-5 flex gap-4">
+        <div className="mt-5 flex gap-2 md:gap-4 flex-wrap">
           {skills.map((skill) => (
             <span
               key={skill.id}
-              className="flex gap-4 items-center bg-white/10 p-2 rounded-xl"
+              className="flex gap-1 md:gap-2 xl:gap-4 items-center bg-white/10 p-1 px-2 md:p-2 rounded-md md:rounded-xl text-sm md:text-base"
             >
               {skill.skillName}
               <button
                 onClick={() => deleteSkill(skill.id)}
                 className={`w-5 h-5 rounded-full flex items-center justify-center text-xs cursor-pointer p-1 hover:bg-white/20`}
               >
-                {/* {skill.id} */}x
+               x
               </button>
             </span>
           ))}
@@ -102,7 +100,7 @@ export default function skills() {
       </div>
       <div className="flex justify-end">
         {showInput ? (
-          <div className="fixed top-0 left-0 w-full h-screen flex justify-center items-center gap-4 backdrop-blur-xl bg-white/2">
+          <div className="fixed top-0 left-0 w-full h-screen flex flex-col md:flex-row justify-center items-center gap-4 backdrop-blur-xl bg-white/2 z-1000 p-4">
             <input
               type="text"
               value={inputValue}
@@ -111,13 +109,13 @@ export default function skills() {
             />
             <button
               onClick={addSkill}
-              className="bg-blue-600 hover:bg-blue-700 cursor-pointer rounded px-4 py-1 uppercase font-bold"
+              className="bg-blue-600 hover:bg-blue-700 cursor-pointer rounded px-3 py-1 text-sm md:text-base md:px-4 uppercase font-bold"
             >
               Save
             </button>
             <button
               onClick={() => setShowInput(false)}
-              className="bg-blue-600 hover:bg-blue-700 cursor-pointer rounded px-4 py-1 uppercase font-bold"
+              className="bg-blue-600 hover:bg-blue-700 cursor-pointer rounded px-3 py-1 text-sm md:text-base md:px-4 uppercase font-bold"
             >
               cancel
             </button>
@@ -125,7 +123,7 @@ export default function skills() {
         ) : (
           <button
             onClick={() => setShowInput(true)}
-            className="bg-blue-600 hover:bg-blue-700 cursor-pointer rounded px-4 py-1 uppercase font-bold"
+            className="bg-blue-600 hover:bg-blue-700 cursor-pointer rounded px-3 py-1 text-sm md:text-base md:px-4 uppercase font-bold"
           >
             Add
           </button>

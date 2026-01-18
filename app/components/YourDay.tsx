@@ -1,6 +1,6 @@
 "use client";
 
-import { Color, TextStyle } from "@tiptap/extension-text-style";
+import { TextStyle } from "@tiptap/extension-text-style";
 import { useEditor } from "@tiptap/react";
 import { EditorContent } from "@tiptap/react";
 import Heading from "@tiptap/extension-heading";
@@ -23,7 +23,6 @@ export default function Editor() {
   const [tasksDone, setTasksDone] = useState<tasksDoneType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  // const [journalContent, setJournalContent] = useState<any>();
 
   // logics and configration for editor
   const defaultContent = `
@@ -162,19 +161,21 @@ export default function Editor() {
   };
 
   return (
-    <div className="w-full bg-black text-white min-h-screen flex items-center justify-center ovreflow-hidden flex-col p-4 overflow-hidden">
-      <div className=" sm:min-w-2xl md:min-w-3xl xl:min-w-6xl">
-        <div className="border border-gray-700 rounded-xl p-4 w-full flex items-center justify-between">
-          <p className="capitalize">things you did today</p>
-          <form className="flex items-center gap-2">
+    <div className="w-full bg-black text-white min-h-screen flex items-center justify-center ovreflow-hidden flex-col p-2 md:p-4 overflow-hidden">
+      <div className="w-full max-w-4xl">
+        <div className="borderborder-gray-700 rounded-xl w-full flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
+          <p className="capitalize text-sm md:text-base text-left w-full">
+            things you did today
+          </p>
+          <form className="w-full md:w-auto flex items-center gap-2">
             <input
               type="text"
-              className="border-b border-b-gray-600 py-1 outline-none"
+              className="w-full md:w-auto ring-2 ring-neutral-500 shadow-sm shadow-neutral-400 rounded p-0.5 outline-none"
               value={task}
               onChange={(e) => setTask(e.target.value)}
             />
             <button
-              className="bg-blue-600 rounded-sm p-1 uppercase cursor-pointer"
+              className="bg-blue-600 rounded-sm p-1 uppercase cursor-pointer text-sm md:text-base"
               onClick={addTask}
             >
               add
@@ -198,14 +199,16 @@ export default function Editor() {
             </div>
           ))}
         </div>
+
         {/* editor */}
         <div className="bg-(--background-color) mt-10 text-gray-300 text-sm funnel-sans">
           <div className="relative w-full">
-            <div className="absolute top-0 p-6 w-full flex items-center justify-center z-1000">
-              <div className="inline-flex items-center justify-center rounded-xl bg-[--light-background] px-3 py-1 gap-1 mr-3">
+            <div className="absolute top-0 p-2 md:p-6 w-full flex items-center md:justify-center overflow-x-auto z-1000 scrollbar-hide md:gap-1">
+              <div className="inline-flex items-center justify-center rounded-xl bg-[--light-background] px-2 py-1 md:gap-1 mr-2 md:px-3 md:mr-3 ">
                 {/* undo button */}
                 <button
                   onClick={() => editor.chain().focus().undo().run()}
+                  title="undo"
                   className="h-6 w-6 hover:bg-[--background-color] flex items-center justify-center rounded-full cursor-pointer"
                 >
                   <Undo size={18} />
@@ -214,32 +217,36 @@ export default function Editor() {
                 {/* redo button */}
                 <button
                   onClick={() => editor.chain().focus().redo().run()}
+                  title="redo"
                   className="h-6 w-6 hover:bg-[--background-color] flex items-center justify-center rounded-full cursor-pointer"
                 >
                   <Redo size={18} />
                 </button>
               </div>
 
-              <div className="inline-flex items-center justify-center rounded-xl bg-[--light-background] px-3 py-1 gap-1">
+              <div className="inline-flex items-center justify-center rounded-xl bg-[--light-background] px-1 md:px-3 py-1 md:gap-1 text-xs md:text-base">
                 {/* bold  */}
                 <button
                   onClick={() => editor.chain().focus().toggleBold().run()}
+                  title="bold"
                   className="h-6 hover:bg-black px-2 font-bold rounded-md cursor-pointer"
                 >
-                  Bold
+                  B
                 </button>
 
                 {/* italic  */}
                 <button
                   onClick={() => editor.chain().focus().toggleItalic().run()}
-                  className="h-6 hover:bg-black px-2 italic rounded-md cursor-pointer"
+                  title="Italic"
+                  className="h-6 hover:bg-black px-2 italic rounded-md cursor-pointer font-serif"
                 >
-                  Italic
+                  I
                 </button>
 
                 {/* strike */}
                 <button
                   onClick={() => editor.chain().focus().toggleStrike().run()}
+                  title="strike"
                   className="h-6 hover:bg-black px-2 line-through rounded-md cursor-pointer"
                 >
                   Strike
@@ -250,14 +257,16 @@ export default function Editor() {
                   onClick={() =>
                     editor.chain().focus().setHorizontalRule().run()
                   }
+                  title="Horizontal rule"
                   className="h-6 text-sm rounded-md font-medium px-2 cursor-pointer hover:bg-black"
                 >
-                  Horizontal rule
+                  __
                 </button>
 
                 {/* highlight */}
                 <button
                   onClick={() => editor.chain().focus().toggleHighlight().run()}
+                  title="highlight"
                   className="h-6 text-sm rounded-md font-medium px-2 cursor-pointer hover:bg-black"
                 >
                   Highlight
@@ -268,6 +277,7 @@ export default function Editor() {
                   onChange={(e) =>
                     editor.chain().focus().setFontSize(e.target.value).run()
                   }
+                  title="font size"
                   className="outline-none px-2 py-1 rounded max-h-100 overflow-y-auto [&::-webkit-scrollbar]:w-1  [&::-webkit-scrollbar-track]:bg-neutral-700  [&::-webkit-scrollbar-thumb]:bg-neutral-500 cursor-pointer"
                 >
                   {Array.from({ length: 100 }, (_, i) => (
@@ -283,9 +293,9 @@ export default function Editor() {
               </div>
             </div>
 
-            <div className="max-w-4x  w-full flex items-start justify-center px-10 pt-20">
+            <div className="max-w-4x w-full flex items-start justify-center px-2 pt-15 md:px-10 md:pt-20">
               <div
-                className="editorContent w-full py  rounded-xl shadow-lg prose prose-lg leading-relaxed "
+                className="editorContent w-full py rounded-xl shadow-lg prose prose-sm md:prose-lg leading-relaxed "
                 onClick={() => editor?.commands.focus()}
               >
                 <EditorContent

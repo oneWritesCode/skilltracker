@@ -99,7 +99,7 @@ export default function Graph() {
   }
 
   return (
-    <div className="w-full mt-10 p-3 border border-gray-800 rounded-xl bg-black/40 backdrop-blur-sm relative overflow-hidden">
+    <div className="w-full mt-5 md:mt-10 p-1 md:p-3 borderborder-gray-800 rounded-md md:rounded-xl bg-black/40 backdrop-blur-sm relative overflow-hidden">
       <h3 className="text-gray-400 mb-3 text-sm font-medium uppercase tracking-wider">
         Activity Graph
       </h3>
@@ -108,7 +108,7 @@ export default function Graph() {
         {/* Day Labels (Left Axis) */}
         <div className="grid grid-rows-7 gap-1 text-[10px] text-gray-400 font-medium h-full pt-[20px]">
           {/* pt-5 to align with the grid below the month headers */}
-          <span className="h-3 flex items-center">Sun</span>
+          <span className="h-3 mt-px flex items-center">Sun</span>
           <span className="h-3 flex items-center">Mon</span>
           <span className="h-3 flex items-center">Tue</span>
           <span className="h-3 flex items-center">Wed</span>
@@ -118,13 +118,13 @@ export default function Graph() {
         </div>
 
         {/* Graph + Month Labels */}
-        <div className="flex flex-col relative overflow-hidden">
+        <div className="flex flex-col relative overflow-hidde overflow-x-auto pb-2 scrollbar-hide [&::-webkit-scrollbar]:w-2">
           {/* Month Labels (Top Axis) */}
-          <div className="flex text-[12px] text-gray-400 mb-2 h-3 sticky left-0">
+          <div className="w-full flex text-[12px] text-gray-400 mb-2 h-3 relative left-0">
             {weeks.map((week, i) => (
               <div
                 key={i}
-                className="w-4 mr-1 text-center overflow-visible whitespace-nowrap"
+                className="min-w-3 borderboder-gray-100 mr-1 text-center overflow-visible whitespace-nowrap"
               >
                 {getMonthLabel(i)}
               </div>
@@ -132,7 +132,7 @@ export default function Graph() {
           </div>
 
           {/* Github Style Grid */}
-          <div className="overflow-x-auto pb-2 scrollbar-hide [&::-webkit-scrollbar]:w-2">
+          <div className="pb-2 overflow-x-autoscrollbar-hide[&::-webkit-scrollbar]:w-2">
             <div className="grid grid-rows-7 grid-flow-col gap-1 w-max">
               {days.map((date) => {
                 const count = data[date] || 0;

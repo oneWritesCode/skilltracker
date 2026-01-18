@@ -75,3 +75,11 @@ img {
   display: inline-block;
   vertical-align: middle;
 }
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

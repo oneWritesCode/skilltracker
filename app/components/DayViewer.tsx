@@ -98,10 +98,10 @@ export default function DayViewer({ date }: DayViewerProps) {
   }
 
   return (
-    <div className="w-full bg-black text-white min-h-[70vh] flex items-center ovreflow-hidden flex-col p-4 overflow-hidden">
-      <div className=" sm:min-w-2xl md:min-w-3xl xl:min-w-6xl">
-        <div className="border border-gray-700 rounded-xl p-4 w-full flex items-center justify-between">
-          <p className="capitalize">
+    <div className="w-full bg-black text-white min-h-[70vh] flex items-center ovreflow-hidden flex-col p-2 md:p-4 overflow-hidden">
+      <div className="w-full max-w-4xl">
+        <div className="border border-gray-700 rounded-xl p-2 md:p-4 w-full flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
+          <p className="capitalize text-sm md:text-base">
             things you did on{" "}
             {new Date(date).toLocaleDateString("en-US", {
               month: "short",
@@ -140,8 +140,8 @@ export default function DayViewer({ date }: DayViewerProps) {
         {/* editor */}
         <div className="bg-(--background-color) mt-10 text-gray-300 text-sm funnel-sans">
           <div className="relative w-full">
-            <div className="absolute top-0 p-6 w-full flex items-center justify-center z-1000 pointer-events-none opacity-70">
-              <div className="inline-flex items-center justify-center rounded-xl bg-[var(--light-background)] px-3 py-1 gap-1 mr-3">
+            <div className="absolute top-0 p-2 md:p-6 w-full flex items-center justify-start md:justify-center overflow-x-auto z-1000 pointer-events-none opacity-70 scrollbar-hide gap-1">
+              <div className="inline-flex items-center justify-center rounded-xl bg-[var(--light-background)] px-2 py-1 gap-1 mr-2 md:px-3 md:mr-3">
                 {/* undo button */}
                 <button
                   className="h-6 w-6 hover:bg-[var(--background-color)] flex items-center justify-center rounded-full"
@@ -210,8 +210,8 @@ export default function DayViewer({ date }: DayViewerProps) {
               </div>
             </div>
 
-            <div className="max-w-4x  w-full flex items-start justify-center px-10 pt-20">
-              <div className="editorContent w-full py  rounded-xl shadow-lg prose prose-lg leading-relaxed pointer-events-none">
+            <div className="max-w-4x w-full flex items-start justify-center px-2 pt-10 md:px-10 md:pt-20">
+              <div className="editorContent w-full py rounded-xl shadow-lg prose prose-sm md:prose-lg leading-relaxed pointer-events-none">
                 <EditorContent
                   editor={editor}
                   className="outline-none min-h-[40vh] cursor-text"
