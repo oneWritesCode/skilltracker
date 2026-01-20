@@ -3,6 +3,7 @@ import Todos from "./Todos";
 import { LogOutIcon, User2 } from "lucide-react";
 import RedirectLinkBtn from "./RedirectLinkBtn";
 import Graph from "./Graph";
+// import InstallPWA from "./InstallPWA";
 
 function Landing() {
   const { data: session } = useSession();
@@ -11,7 +12,7 @@ function Landing() {
     <div className="relative w-full min-h-screen bg-black text-white md:pb-0">
       <div className="px-2 md:px-10 py-4 flex w-full items-center justify-center">
         <div className="w-full max-w-4xl">
-
+          {/* <InstallPWA /> */}
           {/* top of the component */}
           <div className="flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-2 md:gap-4">
             <div className="flex items-center md:gap-4">
@@ -47,7 +48,7 @@ function Landing() {
               </button>
             </div>
           </div>
-          
+
           {/* bottom of the components */}
           <div>
             <Todos />

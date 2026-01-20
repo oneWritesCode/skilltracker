@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import Loading from "./components/Loading";
+import InstallPWA from "./components/InstallPWA";
 // import { OpenTodoProvider } from "./context/IsTodoOpenContext";
 
 const geistSans = Geist({
@@ -16,9 +17,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "skill tracker",
-  description: "track your skill and improve productive",
+  title: "Skill Tracker",
+  description: "Track your skills and improve productivity",
+  manifest: "/manifest.json",
+  themeColor: "#1f2937",
 };
+
 export default function RootLayout({
   children,
 }: {
@@ -30,10 +34,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
+          <InstallPWA />
           <Loading />
-        
+
           {/* <OpenTodoProvider> */}
-            {children}
+          {children}
           {/* </OpenTodoProvider> */}
         </Providers>
       </body>
