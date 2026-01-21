@@ -13,7 +13,7 @@ function RedirectLinkBtn({ link }: PropsType) {
       title="write about your day"
       className="fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-blue-600 rounded-xl p-2 font-bold capitalize"
     >
-      <Pen />submit
+      <Pen />
     </Link>
   );
 }
