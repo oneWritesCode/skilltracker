@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bubblegum_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
+// import Loading from "./components/Loading";
 import Loading from "./components/Loading";
-import InstallPWA from "./components/InstallPWA";
 // import { OpenTodoProvider } from "./context/IsTodoOpenContext";
 
 const geistSans = Geist({
@@ -14,6 +14,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const bubblegumSans = Bubblegum_Sans({
+  variable: "--font-bubblegum-sans",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -31,10 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bubblegumSans.variable} antialiased`}
       >
         <Providers>
-          <InstallPWA />
           <Loading />
 
           {/* <OpenTodoProvider> */}

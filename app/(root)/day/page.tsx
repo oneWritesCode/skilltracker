@@ -1,15 +1,15 @@
-"use client";
+// "use client";
 
-import { useEffect, useState } from "react";
-import YourDay from "@/app/components/YourDay";
+// import { useEffect, useState } from "react";
+// import YourDay from "@/app/components/YourDay";
 
-type tasksDoneType = {
-  taskName: string;
-  isDone: boolean;
-};
+// type tasksDoneType = {
+//   taskName: string;
+//   isDone: boolean;
+// };
 
-function page() {
-  return <YourDay />;
-}
+// function page() {
+//   return <YourDay />;
+// }
 
-export default page;
+// export default page;

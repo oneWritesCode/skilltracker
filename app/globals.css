@@ -8,17 +8,35 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--accent-blue);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-bubblegum: var(--font-bubblegum-sans);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --background-color: #202020;
-    --light-background: #303030;
+    --background: #FBEF76;
+    /* User requested: #FBEF76 replacing dark background */
+    --foreground: #171717;
+    /* Text needs to be dark on Yellow background */
+    --background-color: #FBEF76;
+    --light-background: #FD8A6B;
+    /* Replacing shades? Let's use peach as secondary/accent */
+    --accent-blue: #FD8A6B;
+    /* User requested: #FD8A6B replacing blue */
   }
+}
+
+:root {
+  /* Default light mode - maybe user wants yellow here too? 
+     The request said "replacing dark background". 
+     I'll stick to updating dark mode variables primarily if that's what's active or requested, 
+     but "theme of the web" implies overall. 
+     Let's define a custom class or just override variables. */
+  --background: #ffffff;
+  --foreground: #171717;
+  --accent-blue: #FD8A6B;
 }
 
 /* body {
@@ -79,6 +97,7 @@ img {
 @utility scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
