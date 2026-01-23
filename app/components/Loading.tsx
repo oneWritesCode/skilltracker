@@ -11,7 +11,6 @@ const [isLoading, setIsLoading] = useState(true);
 
 useEffect(() => {
 const handleLoad = () => {
-
     setTimeout(() => {
     setIsLoading(false);
     }, 300);
@@ -35,13 +34,13 @@ const Loader = ({ isLoading }: LoaderProps) => {
   return (
     <div
       className={`
-        fixed inset-0 bg-black flex flex-col items-center justify-center z-9999
+        fixed inset-0 bg-(--background-color) flex flex-col items-center justify-center z-9999
         transition-all duration-500 ease-out
         ${isLoading ? "opacity-100 visible" : "opacity-0 invisible"}
       `}
     >
        <span className="tracking-widest pb-10">
-         <div className="w-12 h-12 border-4 border-yellow-900/20 border-t-white rounded-full animate-spin" />
+         <div className="w-12 h-12 border-5 border-yellow-900/10 border-t-(--red-background) rounded-full animate-spin" />
         </span>
     </div>
   );

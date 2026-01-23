@@ -1,6 +1,6 @@
 "use client";
 
-// import { useOpenTodo } from "@/app/context/IsTodoOpenContext";
+import { X, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type setSkillsType = {
@@ -28,7 +28,7 @@ export default function skills() {
       data.map((skill: SkillsFromBackendType) => ({
         skillName: skill.skillName,
         id: skill.id,
-      }))
+      })),
     );
   };
 
@@ -76,29 +76,56 @@ export default function skills() {
   };
 
   return (
-    <div
-      className={`w-full my-4 md:p-2`}
-    >
+    <div className={`w-full my-3  capitalize font-medium text-sm`}>
       skills you are learning:
       <div>
-        <div className="mt-5 flex gap-2 md:gap-4 flex-wrap">
+        <div className="mt-3 flex gap-2 md:gap-4 flex-wrap">
           {skills.map((skill) => (
             <span
               key={skill.id}
-              className="flex gap-1 md:gap-2 xl:gap-4 items-center bg-white/10 p-1 px-2 md:p-2 rounded-md md:rounded-xl text-sm md:text-base"
+              className="flex gap-1 md:gap-2 xl:gap-4 items-center bg-(--red-background) p-1 px-2 rounded-md md:rounded-xl text-xs md:text-sm font-bold uppercase"
             >
               {skill.skillName}
               <button
                 onClick={() => deleteSkill(skill.id)}
                 className={`w-5 h-5 rounded-full flex items-center justify-center text-xs cursor-pointer p-1 hover:bg-white/20`}
               >
-               x
+                x
               </button>
             </span>
           ))}
+          {showInput ? (
+           <form className="flex items-center gap-2">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                 className="w-32 ring-2 ring-neutral-800 shadow-sm shadow-neutral-400 rounded-xl px-2 py-0.5 outline-none bg-transparent text-black text-sm m-1"
+               />
+              <button
+                onClick={addSkill}
+                 className="bg-black text-white rounded-xl px-3 py-0.5 uppercase cursor-pointer text-sm font-bold transition-colors"
+              >
+                Save
+              </button>
+              <button
+                onClick={() => setShowInput(false)}
+               className="p-0.5 rounded-full text-black transition-colors cursor-pointer hover:bg-black hover:text-white"
+              >
+                <X size={16} />
+               </button>
+            </form>
+          ) : (
+            <button
+              onClick={() => setShowInput(true)}
+              className="p-1.5 rounded-full text-black transition-colors cursor-pointer border border-black hover:bg-black hover:text-white"
+            >
+              <Plus size={16} fontWeight={"bold"}/>
+            </button>
+          )}
         </div>
       </div>
-      <div className="flex justify-end">
+      {/* <div className="flex justify-end">
         {showInput ? (
           <div className="fixed top-0 left-0 w-full h-screen flex flex-col md:flex-row justify-center items-center gap-4 backdrop-blur-xl bg-white/2 z-1000 p-4">
             <input
@@ -128,7 +155,7 @@ export default function skills() {
             Add
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

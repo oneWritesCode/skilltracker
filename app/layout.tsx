@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Bubblegum_Sans } from "next/font/google";
+import {Funnel_Sans, Bubblegum_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
-// import Loading from "./components/Loading";
 import Loading from "./components/Loading";
-// import { OpenTodoProvider } from "./context/IsTodoOpenContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const FunnelSans = Funnel_Sans({
+  variable: "--font-funnel-sans",
   subsets: ["latin"],
+  weight: "400",
 });
 
 const bubblegumSans = Bubblegum_Sans({
@@ -37,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${bubblegumSans.variable} antialiased`}
+        className={`${bubblegumSans.variable} ${FunnelSans.variable} antialiased`}
       >
         <Providers>
           <Loading />

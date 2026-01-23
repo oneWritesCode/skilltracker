@@ -1,6 +1,6 @@
 "use client";
 
-import Landing from "@/app/components/Landing";
+import Landing from "@/app/pages/profile";
 import LoginPage from "../../components/LoginPage";
 import { useSession } from "next-auth/react";
 

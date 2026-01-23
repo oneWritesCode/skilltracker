@@ -9,31 +9,23 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--accent-blue);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-funnelsans: var(--font-bubblegum-sans) ;
   --font-bubblegum: var(--font-bubblegum-sans);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #FBEF76;
-    /* User requested: #FBEF76 replacing dark background */
     --foreground: #171717;
-    /* Text needs to be dark on Yellow background */
+    /* --background-color: #FA5C5C; */
     --background-color: #FBEF76;
-    --light-background: #FD8A6B;
-    /* Replacing shades? Let's use peach as secondary/accent */
+    --light-background: #FBEF76;
+    --red-background: #FD8A6B;
     --accent-blue: #FD8A6B;
-    /* User requested: #FD8A6B replacing blue */
   }
 }
 
 :root {
-  /* Default light mode - maybe user wants yellow here too? 
-     The request said "replacing dark background". 
-     I'll stick to updating dark mode variables primarily if that's what's active or requested, 
-     but "theme of the web" implies overall. 
-     Let's define a custom class or just override variables. */
   --background: #ffffff;
   --foreground: #171717;
   --accent-blue: #FD8A6B;
@@ -79,16 +71,16 @@
   outline: none;
 }
 
-img {
-  margin: auto;
-  padding: 10px;
+.editorContent img {
+  border-radius: 12px;
+  margin: 0px 3px;
+  border: 2px solid #ffffff27;
 }
 
 /* styling to fix bugs in hightights __________________ */
 .ProseMirror mark,
 .ProseMirror span[style*="background-color"] {
   line-height: 1.4;
-  /* or try 1.5 for more space */
   padding: 0.1em 0.2em;
   display: inline-block;
   vertical-align: middle;

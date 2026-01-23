@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { FiDownload, FiX } from "react-icons/fi";
+import { Download } from "lucide-react";
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[];
@@ -82,40 +82,18 @@ export default function InstallPWA() {
     setShowInstallButton(false);
   };
 
-  const handleDismiss = () => {
-    setShowInstallButton(false);
-  };
-
   // Don't show if already installed or no prompt available
   if (isInstalled || !showInstallButton) {
     return null;
   }
 
   return (
-    <div className="z-50 bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-3 shadow-lg">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <FiDownload className="text-xl flex-shrink-0" />
-          <p className="text-sm md:text-base font-medium">
-            Install Skill Tracker for a better experience!
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={handleInstallClick}
-            className="bg-white text-indigo-600 px-4 py-1.5 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors"
-          >
-            Install
-          </button>
-          <button
-            onClick={handleDismiss}
-            className="p-1.5 hover:bg-white/20 rounded-full transition-colors"
-            aria-label="Dismiss"
-          >
-            <FiX className="text-lg" />
-          </button>
-        </div>
-      </div>
-    </div>
+    <button
+      onClick={handleInstallClick}
+      className="flex items-center gap-3 px-4 py-2 w-full rounded-xl bg-[#FBF9D1] mb-3 text-balck transition-all font-bold cursor-pointer"
+    >
+      <Download className="w-5 h-5" />
+      <span>Install App</span>
+    </button>
   );
 }
