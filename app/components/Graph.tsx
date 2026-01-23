@@ -57,11 +57,11 @@ export default function Graph() {
   }
 
   const getColor = (count: number) => {
-    if (count === 0) return "bg-gray-900/10 border-gray-800/90";
-    if (count <= 2) return "bg-blue-900/30 border-blue-800";
-    if (count <= 4) return "bg-blue-900/50 border-blue-800";
-    if (count <= 6) return "bg-blue-900/70 border-blue-800";
-    return "bg-blue-900 border-blue-800";
+    if (count === 0) return "bg-(--background-color) border-gray-800/70";
+    if (count <= 2) return "bg-(--red-background)/30 border-(--red-background)/10";
+    if (count <= 4) return "bg-(--red-background)/50 border-(--red-background)/20";
+    if (count <= 6) return "bg-(--red-background)/70 border-(--red-background)/30";
+    return "bg-(--red-background) border-(--red-background)";
   };
 
   const formatDate = (dateString: string) => {
@@ -94,19 +94,19 @@ export default function Graph() {
 
   if (loading) {
     return (
-      <div className="w-full mt-10 p-4 border border-gray-800 rounded-xl bg-black/40 animate-pulse h-[200px]"></div>
+      <div className="w-full mt-10 p-4 border border-(--red-background) rounded-xl bg-(--red-background)/40 animate-pulse h-[200px]"></div>
     );
   }
 
   return (
-    <div className="w-full mt-5 md:mt-10 p-1 md:p-3 borderborder-gray-800 rounded-md md:rounded-xl bg-black/40 backdrop-blur-sm relative overflow-hidden">
-      <h3 className="text-gray-400 mb-3 text-sm font-medium uppercase tracking-wider">
+    <div className="w-full mt-2 md:mt-5 borderborder-gray-800 rounded-md md:rounded-xl backdrop-blur-sm relative overflow-hidden">
+      <h3 className="text-gray-700 mb-3 text-sm font-extrabold uppercase tracking-wider">
         Activity Graph
       </h3>
 
       <div className="flex gap-2">
         {/* Day Labels (Left Axis) */}
-        <div className="grid grid-rows-7 gap-1 text-[10px] text-gray-400 font-medium h-full pt-[20px]">
+        <div className="grid grid-rows-7 gap-1 text-[10px] text-gray-700 font-bold h-full pt-[20px]">
           {/* pt-5 to align with the grid below the month headers */}
           <span className="h-3 mt-px flex items-center">Sun</span>
           <span className="h-3 flex items-center">Mon</span>
@@ -120,11 +120,11 @@ export default function Graph() {
         {/* Graph + Month Labels */}
         <div className="flex flex-col relative overflow-hidde overflow-x-auto pb-2 scrollbar-hide [&::-webkit-scrollbar]:w-2">
           {/* Month Labels (Top Axis) */}
-          <div className="w-full flex text-[12px] text-gray-400 mb-2 h-3 relative left-0">
+          <div className="w-full flex text-[12px] text-gray-700 mb-2 h-3 font-bold relative left-0">
             {weeks.map((week, i) => (
               <div
                 key={i}
-                className="min-w-3 borderboder-gray-100 mr-1 text-center overflow-visible whitespace-nowrap"
+                className="min-w-3 mr-1 text-center overflow-visible whitespace-nowrap"
               >
                 {getMonthLabel(i)}
               </div>

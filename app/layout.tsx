@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {Funnel_Sans, Bubblegum_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import Loading from "./components/Loading";
-import InstallPWA from "./components/InstallPWA";
-// import { OpenTodoProvider } from "./context/IsTodoOpenContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
+
+const FunnelSans = Funnel_Sans({
+  variable: "--font-funnel-sans",
   subsets: ["latin"],
+  weight: "400",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const bubblegumSans = Bubblegum_Sans({
+  variable: "--font-bubblegum-sans",
   subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -31,10 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${bubblegumSans.variable} ${FunnelSans.variable} antialiased`}
       >
         <Providers>
-          <InstallPWA />
           <Loading />
 
           {/* <OpenTodoProvider> */}

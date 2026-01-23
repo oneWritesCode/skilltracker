@@ -1,6 +1,6 @@
 "use client";
 
-import DayViewer from "@/app/components/DayViewer";
+import DayViewer from "@/app/pages/DayViewer";
 import { usePathname } from "next/navigation";
 
 export default function DayPage() {
@@ -8,7 +8,7 @@ export default function DayPage() {
   const id = pathname?.split("/").pop() || "";
 
   return (
-    <div className="min-h-screen bg-black w-full pt-20">
+    <div className="min-h-screen bg-black w-full">
       <DayViewer date={id} />
     </div>
   );

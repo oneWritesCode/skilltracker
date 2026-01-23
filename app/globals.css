@@ -8,17 +8,27 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--accent-blue);
+  --font-funnelsans: var(--font-bubblegum-sans) ;
+  --font-bubblegum: var(--font-bubblegum-sans);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --background-color: #202020;
-    --light-background: #303030;
+    --background: #FBEF76;
+    --foreground: #171717;
+    /* --background-color: #FA5C5C; */
+    --background-color: #FBEF76;
+    --light-background: #FBEF76;
+    --red-background: #FD8A6B;
+    --accent-blue: #FD8A6B;
   }
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --accent-blue: #FD8A6B;
 }
 
 /* body {
@@ -61,16 +71,16 @@
   outline: none;
 }
 
-img {
-  margin: auto;
-  padding: 10px;
+.editorContent img {
+  border-radius: 12px;
+  margin: 0px 3px;
+  border: 2px solid #ffffff27;
 }
 
 /* styling to fix bugs in hightights __________________ */
 .ProseMirror mark,
 .ProseMirror span[style*="background-color"] {
   line-height: 1.4;
-  /* or try 1.5 for more space */
   padding: 0.1em 0.2em;
   display: inline-block;
   vertical-align: middle;
@@ -79,6 +89,7 @@ img {
 @utility scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
