@@ -28,7 +28,7 @@ export default function Navbar() {
       {/* Mobile Hamburger Trigger - Visible when closed */}
       <button
         onClick={toggleNavbar}
-        className={`fixed top-4 left-4 p-1 group rounded-md backdrop-blur-sm hover:-gray-900/20 transition-all duration-500 cursor-pointer flex flex-col gap- z-1000 ${isOpen ? "opacity-0" : "opacity-100"}`}
+        className={`fixed top-3 left-3 md:top-4 md:left-4 p-1 group rounded-md backdrop-blur-sm hover:-gray-900/20 transition-all duration-500 cursor-pointer flex flex-col gap- z-1000 ${isOpen ? "opacity-0" : "opacity-100"}`}
         aria-label="Open Menu"
       >
         <div
@@ -54,13 +54,13 @@ export default function Navbar() {
 
       {/* Sidebar */}
       <nav
-        className={`fixed top-0 left-0 h-full w-80 bg-(--light-background) shadow-2xl z-50 transform transition-transform duration-500 ease-in-out text-foreground  font-funnelsans ${
+        className={`fixed top-0 left-0 h-full max-w-full w-80 bg-(--light-background) shadow-2xl z-50 transform transition-transform duration-500 ease-in-out text-foreground  font-funnelsans ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex flex-col h-full p-6">
+        <div className="flex flex-col h-full p-4 md:p-6">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-between mb-4 md:mb-8">
             <h2 className="text-xl font-bold text-[#FA5C5C] uppercase">
               SkillTracker
             </h2>
@@ -68,7 +68,6 @@ export default function Navbar() {
               onClick={toggleNavbar}
               className="p-3 group relative cursor-pointer"
             >
-              {/* <X className="w-6 h-6 text-foreground" /> */}
               <div
                 className={`w-4 group-hover:w-3 group-hover:-rotate-45 group-hover:top-2 group-hover:left-1 absolute right-1 top-2.5 rotate-45 border-2 rounded-full border-black hover transition-all duration-400 `}
               ></div>
@@ -79,7 +78,7 @@ export default function Navbar() {
           </div>
 
           {/* User Profile Section */}
-          <div className="flex gap-2 mb-4">
+          <div className="flex gap-2 md:mb-4">
             <div className="w-20 h-20 rounded-full flex items-center justify-center mb-4 border-3 border-white/70 text-[#FD8A6B]">
               {session?.user?.image ? (
                 <img

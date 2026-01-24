@@ -9,7 +9,7 @@ function Landing() {
   const { data: session } = useSession();
 
   return (
-    <div className="relative w-full min-h-screen bg-(--background-color) text-foreground md:pb-0">
+    <div className="relative w-full min-h-screen bg-(--background-color) text-foreground md:pt-0 pt-6">
       <div className="px-2 md:px-10 py-4 flex w-full items-center justify-center">
         <div className="w-full max-w-4xl">
           {/* <InstallPWA /> */}

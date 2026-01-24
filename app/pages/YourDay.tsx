@@ -167,8 +167,8 @@ export default function Editor() {
     <div className="w-full relative bg-(--background-color) min-h-screen flex items-center justify- ovreflow-hidden flex-col overflow-hidden font-bubblegum">
     <Navbar/>
       {/* editor toolbar */}
-      <div className="w-full border border-b-black relative top-0 p-2 md:pt-4 md:pb-2 w-full flex items-center md:justify-end overflow-x-auto z-10 scrollbar-hide md:gap-1 px-2 md:px-4 ">
-        <div className="inline-flex items-center justify-center rounded-xl px-2 py-1 md:gap-1 mr-2 md:px-3 md:mr-3 ">
+      <div className="w-full border-b border-b-black relative top-0 p-2 md:pt-4 md:pb-2 flex items-center justify-end overflow-x-auto z-10 scrollbar-hide md:gap-1 px-2 md:px-4 ">
+        <div className="inline-flex items-center justify-center rounded-xl md:px-2 md:py-1 md:gap-1 mr-2 md:px-3 md:mr-3 ">
           {/* undo button */}
           <button
             onClick={() => editor.chain().focus().undo().run()}
@@ -188,12 +188,12 @@ export default function Editor() {
           </button>
         </div>
 
-        <div className="inline-flex items-center justify-center rounded-xl px-1 md:px-3 py-1 md:gap-1 text-xs md:text-base">
+        <div className="inline-flex items-center justify-center rounded-xl md:px-3 py-1 md:gap-1 text-xs md:text-base">
           {/* bold  */}
           <button
             onClick={() => editor.chain().focus().toggleBold().run()}
             title="bold"
-            className="h-6 hover:bg-black px-2 font-bold rounded-md cursor-pointer"
+            className="h-6 px-2 font-bold rounded-md cursor-pointer hover:scale-105 hover:text-(--red-background) transition-all "
           >
             B
           </button>
@@ -202,7 +202,7 @@ export default function Editor() {
           <button
             onClick={() => editor.chain().focus().toggleItalic().run()}
             title="Italic"
-            className="h-6 hover:bg-black px-2 italic rounded-md cursor-pointer font-serif"
+            className="h-6 px-2 italic rounded-md cursor-pointer font-serif hover:scale-105 hover:text-(--red-background) transition-all "
           >
             I
           </button>
@@ -211,7 +211,7 @@ export default function Editor() {
           <button
             onClick={() => editor.chain().focus().toggleStrike().run()}
             title="strike"
-            className="h-6 hover:bg-black px-2 line-through rounded-md cursor-pointer"
+            className="h-6 px-2 line-through rounded-md cursor-pointer hover:scale-105 hover:text-(--red-background) transition-all "
           >
             Strike
           </button>
@@ -220,16 +220,16 @@ export default function Editor() {
           <button
             onClick={() => editor.chain().focus().setHorizontalRule().run()}
             title="Horizontal rule"
-            className="h-6 text-sm rounded-md font-medium px-2 cursor-pointer hover:bg-black"
+            className="h-6 text-sm rounded-md font-medium px-2 cursor-pointer hover:scale-105 hover:text-(--red-background) transition-all "
           >
-            __
+            _
           </button>
 
           {/* highlight */}
           <button
             onClick={() => editor.chain().focus().toggleHighlight().run()}
             title="highlight"
-            className="h-6 text-sm rounded-md font-medium px-2 cursor-pointer hover:bg-black"
+            className="h-6 text-sm rounded-md font-medium px-2 cursor-pointer hover:scale-105 hover:text-(--red-background) transition-all "
           >
             Highlight
           </button>
@@ -240,13 +240,13 @@ export default function Editor() {
               editor.chain().focus().setFontSize(e.target.value).run()
             }
             title="font size"
-            className="outline-none px-2 py-1 rounded max-h-100 overflow-y-auto [&::-webkit-scrollbar]:w-1  [&::-webkit-scrollbar-track]:bg-neutral-700  [&::-webkit-scrollbar-thumb]:bg-neutral-500 cursor-pointer"
+            className="outline-none px-2 py-1 rounded max-h-100 overflow-y-auto border-none [&::-webkit-scrollbar]:w-1  [&::-webkit-scrollbar-track]:bg-(--background-color)  [&::-webkit-scrollbar-thumb]:bg-(--red-background) cursor-pointer hidden md:block"
           >
             {Array.from({ length: 100 }, (_, i) => (
               <option
                 key={i}
                 value={`${i}px`}
-                className="h-6 w-6 text-sm bg-black/90"
+                className="h-6 w-6 text-sm bg-(--red-background)/90 cursor-pointer"
               >
                 {i}px
               </option>
