@@ -1,16 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X, LogOut, User2 } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
+import Cookies from "js-cookie";
 import InstallPWA from "./InstallPWA";
 
 export default function Navbar() {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
+  const [optimisticEmail, setOptimisticEmail] = useState<string | null>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    // Check for cookie on mount - "if cookies are there"
+    const savedEmail = Cookies.get("sk_user_email");
+    if (savedEmail) {
+      setOptimisticEmail(savedEmail);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (session?.user?.email) {
+      Cookies.set("sk_user_email", session.user.email, { expires: 7 });
+    }
+  }, [session]);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -99,7 +115,7 @@ export default function Navbar() {
                 {session?.user?.name}
               </h3>
               <p className="text-xs font-semibold text-muted-foreground">
-                {session?.user?.email}
+                {session?.user?.email || optimisticEmail}
               </p>
             </div>
           </div>
@@ -144,7 +160,10 @@ export default function Navbar() {
             <button
               className="inline-flex items-center gap-3 px-4 py-2 w-full rounded-xl bg-[#D73535] text-white transition-all font-bold cursor-pointer"
               title="logout"
-              onClick={() => signOut()}
+              onClick={() => {
+                Cookies.remove("sk_user_email");
+                signOut();
+              }}
             >
               <LogOut className="w-4 h-4" />
               <span>Sign Out</span>

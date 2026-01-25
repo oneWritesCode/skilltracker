@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import LoginPage from "../components/LoginPage";
+import YourDay from "@/app/pages/YourDay";
+import LoginPage from "../../components/LoginPage";
 import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
-import Home from "../pages/Home";
-import YourDay from "../pages/YourDay";
 
 export default function LoginButton() {
   const { data: session } = useSession();
