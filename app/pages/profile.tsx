@@ -1,4 +1,6 @@
 import { useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
 import Todos from "../components/Todos";
 import { User2 } from "lucide-react";
 // import RedirectLinkBtn from "./RedirectLinkBtn";
@@ -7,6 +9,19 @@ import Navbar from "../components/Navbar";
 
 function Landing() {
   const { data: session } = useSession();
+  const [optimisticEmail, setOptimisticEmail] = useState<string | null>(null);
+  const [optimisticName, setOptimisticName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const savedEmail = Cookies.get("sk_user_email");
+    const savedName = Cookies.get("sk_user_name");
+    if (savedEmail) {
+      setOptimisticEmail(savedEmail);
+    }
+    if (savedName) {
+      setOptimisticName(savedName);
+    }
+  }, []);
 
   return (
     <div className="relative w-full min-h-screen bg-(--background-color) text-foreground md:pt-0 pt-6">
@@ -17,27 +32,25 @@ function Landing() {
           {/* top of the component */}
           <div className="flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-2 md:gap-4">
             <div className="flex gap-3">
-              <div className="w-20 h-20 rounded-full flex items-center justify-center border-3 border-white/70 text-[#FD8A6B]">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center border-3 border-transparent">
                 {session?.user?.image ? (
                   <img
                     src={session.user.image}
                     alt={session.user.name ?? "User profile"}
-                    className="rounded-full -20"
+                    className="rounded-full border-white border-3"
                   />
                 ) : (
-                  <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full bg-white/0 flex items-center justify-center">
-                    <span className="border-4 rounded-full p-2 md:p-5 border-gray-200">
-                      <User2 size={40} className="md:w-[60px] md:h-[60px]" />
-                    </span>
+                  <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full flex items-center justify-center">
+                  <img src="/images/alternateUserImage.png" alt="" className="rounded-full w-full" />
                   </div>
                 )}
               </div>
               <div className="flex flex-col justify-center">
                 <h3 className="font-bold text-lg text-foreground">
-                  {session?.user?.name}
+                  {session?.user?.name || optimisticName}
                 </h3>
                 <p className="text-xs font-semibold text-muted-foreground">
-                  {session?.user?.email}
+                  {session?.user?.email || optimisticEmail}
                 </p>
               </div>
             </div>

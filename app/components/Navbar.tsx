@@ -12,13 +12,18 @@ export default function Navbar() {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
   const [optimisticEmail, setOptimisticEmail] = useState<string | null>(null);
+  const [optimisticName, setOptimisticName] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
     // Check for cookie on mount - "if cookies are there"
     const savedEmail = Cookies.get("sk_user_email");
+    const savedName = Cookies.get("sk_user_name");
     if (savedEmail) {
       setOptimisticEmail(savedEmail);
+    }
+    if (savedName) {
+      setOptimisticName(savedName);
     }
   }, []);
 
@@ -26,17 +31,13 @@ export default function Navbar() {
     if (session?.user?.email) {
       Cookies.set("sk_user_email", session.user.email, { expires: 7 });
     }
+    if (session?.user?.name) {
+      Cookies.set("sk_user_name", session.user.name, { expires: 7 });
+    }
   }, [session]);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
-  };
-
-  // Mock user data - normally this would come from useSession()
-  const user = {
-    name: "John Doe",
-    email: "john@example.com",
-    image: null,
   };
 
   return (
@@ -95,24 +96,22 @@ export default function Navbar() {
 
           {/* User Profile Section */}
           <div className="flex gap-2 md:mb-4">
-            <div className="w-20 h-20 rounded-full flex items-center justify-center mb-4 border-3 border-white/70 text-[#FD8A6B]">
-              {session?.user?.image ? (
-                <img
-                  src={session.user.image}
-                  alt={session.user.name ?? "User profile"}
-                  className="rounded-full -20"
-                />
-              ) : (
-                <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full bg-white/0 flex items-center justify-center">
-                  <span className="border-4 rounded-full p-2 md:p-5 border-gray-200">
-                    <User2 size={40} className="md:w-[60px] md:h-[60px]" />
-                  </span>
-                </div>
-              )}
-            </div>
+           <div className="w-20 h-20 rounded-full flex items-center justify-center border-3 border-transparent">
+                {session?.user?.image ? (
+                  <img
+                    src={session.user.image}
+                    alt={session.user.name ?? "User profile"}
+                    className="rounded-full border-white border-3"
+                  />
+                ) : (
+                  <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full flex items-center justify-center">
+                  <img src="/images/alternateUserImage.png" alt="" className="rounded-full w-full" />
+                  </div>
+                )}
+              </div>
             <div className="flex flex-col justify-center">
               <h3 className="font-bold text-lg text-foreground">
-                {session?.user?.name}
+                {session?.user?.name || optimisticName}
               </h3>
               <p className="text-xs font-semibold text-muted-foreground">
                 {session?.user?.email || optimisticEmail}
@@ -162,6 +161,7 @@ export default function Navbar() {
               title="logout"
               onClick={() => {
                 Cookies.remove("sk_user_email");
+                Cookies.remove("sk_user_name");
                 signOut();
               }}
             >
