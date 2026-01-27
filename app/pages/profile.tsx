@@ -1,11 +1,11 @@
+import Footer from "../components/Footer";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Todos from "../components/Todos";
-import { User2 } from "lucide-react";
-// import RedirectLinkBtn from "./RedirectLinkBtn";
 import Graph from "../components/Graph";
 import Navbar from "../components/Navbar";
+import Link from "next/link";
 
 function Landing() {
   const { data: session } = useSession();
@@ -41,7 +41,11 @@ function Landing() {
                   />
                 ) : (
                   <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full flex items-center justify-center">
-                  <img src="/images/alternateUserImage.png" alt="" className="rounded-full w-full" />
+                    <img
+                      src="/images/alternateUserImage.png"
+                      alt=""
+                      className="rounded-full w-full"
+                    />
                   </div>
                 )}
               </div>
@@ -63,6 +67,20 @@ function Landing() {
           </div>
         </div>
       </div>
+      {/* <Footer /> */}
+
+      <footer className="w-full absolute bottom-0 bg-(--light-background) border-t-2border-black ">
+        <div className="max-w-4xl mx-auto pb-10">
+          <div className="mt-12 md:mt-16 pt-8 border-t-2 border-black/10 flex flex-col mdflex-row justify-between items-center gap-4">
+            <p className="text-sm font-black uppercase">
+              Created by <Link href="d33pak.space" className="text-[#FA5C5C]">Deepak</Link> @2026
+            </p>
+            <p className="text-xs font-bold text-muted-foreground uppercase opacity-50">
+              © 2026 SkillTracker. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

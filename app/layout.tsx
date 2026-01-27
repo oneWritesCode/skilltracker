@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import {Funnel_Sans, Bubblegum_Sans } from "next/font/google";
+import { Funnel_Sans, Bubblegum_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import Loading from "./components/Loading";
+// import Footer from "./components/Footer";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -40,10 +41,7 @@ export default function RootLayout({
       >
         <Providers>
           <Loading />
-
-          {/* <OpenTodoProvider> */}
           {children}
-          {/* </OpenTodoProvider> */}
         </Providers>
       </body>
     </html>
