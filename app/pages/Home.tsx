@@ -17,8 +17,6 @@ interface Card {
 const DEFAULT_CARDS: Card[] = [
   { id: "gym", title: "Gym" },
   { id: "poems", title: "Poems" },
-  { id: "poemsk", title: "Poemsk" },
-  { id: "poemsj", title: "Poemsj" },
   { id: "quotes", title: "Quotes" },
 ];
 
