@@ -33,13 +33,13 @@ function Landing() {
           <div className="flex flex-col-reverse md:flex-row items-start md:items-center justify-between gap-2 md:gap-4">
             <div className="flex gap-3">
               <div className="w-20 h-20 rounded-full flex items-center justify-center border-3 border-transparent">
-                {session?.user?.image ? (
+                {/* {session?.user?.image ? (
                   <img
                     src={session.user.image}
                     alt={session.user.name ?? "User profile"}
                     className="rounded-full border-white border-3"
                   />
-                ) : (
+                ) : ( */}
                   <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full flex items-center justify-center">
                     <img
                       src="/images/alternateUserImage.png"
@@ -47,7 +47,7 @@ function Landing() {
                       className="rounded-full w-full"
                     />
                   </div>
-                )}
+                {/* )} */}
               </div>
               <div className="flex flex-col justify-center">
                 <h3 className="font-bold text-lg text-foreground">

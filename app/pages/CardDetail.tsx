@@ -1,0 +1,196 @@
+"use client";
+
+import { TextStyle } from "@tiptap/extension-text-style";
+import { useEditor, EditorContent } from "@tiptap/react";
+import Heading from "@tiptap/extension-heading";
+import StarterKit from "@tiptap/starter-kit";
+import Highlight from "@tiptap/extension-highlight";
+import { FontSize } from "@/app/extensions/FontSize";
+import Image from "@tiptap/extension-image";
+import { Redo, Undo, Loader2, X, Plus, ArrowLeft } from "lucide-react";
+import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
+import Link from "next/link";
+
+type tasksDoneType = {
+  title: string;
+  completed: boolean;
+};
+
+interface CardDetailProps {
+  id: string;
+}
+
+export default function CardDetail({ id }: CardDetailProps) {
+  const [task, setTask] = useState<string>("");
+  const [tasksDone, setTasksDone] = useState<tasksDoneType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [isAddingTask, setIsAddingTask] = useState(false);
+  const [cardTitle, setCardTitle] = useState("");
+
+  const storageKey = `extra_card_${id}`;
+
+  const defaultContent = `
+       <strong>Write about ${id} here</strong>
+       <br />
+       <br />
+       - &nbsp; Start tracking your progress...
+    `;
+
+  const editor: any = useEditor({
+    extensions: [
+      StarterKit.configure({ heading: false }),
+      Image.configure({ inline: false, allowBase64: true }),
+      TextStyle,
+      Highlight,
+      FontSize,
+      Heading.configure({ levels: [1, 2, 3, 4, 5, 6] }),
+    ],
+    content: defaultContent,
+    editorProps: {
+      handlePaste(view, event) {
+        const items = Array.from(event.clipboardData?.items || []);
+        const imageItem = items.find((item) => item.type.includes("image"));
+        if (imageItem) {
+          const file = imageItem.getAsFile();
+          const reader = new FileReader();
+          reader.onload = () => {
+            const src = reader.result;
+            editor
+              ?.chain()
+              .focus()
+              .setImage({ src, width: "300px", height: "auto" })
+              .run();
+          };
+          reader.readAsDataURL(file!);
+          return true;
+        }
+        return false;
+      },
+    },
+    immediatelyRender: false,
+  });
+
+  useEffect(() => {
+    // Get title from cards list
+    const savedCards = localStorage.getItem("skilltracker_cards");
+    if (savedCards) {
+      const cards = JSON.parse(savedCards);
+      const currentCard = cards.find((c: any) => c.id === id);
+      if (currentCard) setCardTitle(currentCard.title);
+    }
+
+    // Load content
+    const savedData = localStorage.getItem(storageKey);
+    if (savedData && editor) {
+      try {
+        const { content, tasks } = JSON.parse(savedData);
+        if (content) editor.commands.setContent(content);
+        if (tasks) setTasksDone(tasks);
+      } catch (e) {
+        console.error("Error loading from localStorage", e);
+      }
+    }
+  }, [id, editor, storageKey]);
+
+  const saveToLocalStorage = () => {
+    if (!editor) return;
+    setIsLoading(true);
+    const content = editor.getJSON();
+    const data = {
+      content,
+      tasks: tasksDone,
+      lastUpdated: new Date().toISOString(),
+    };
+
+    localStorage.setItem(storageKey, JSON.stringify(data));
+
+    setTimeout(() => {
+      setIsLoading(false);
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
+    }, 500);
+  };
+
+  const addTask = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!task?.trim()) return;
+    setTasksDone((prev) => [{ title: task, completed: true }, ...prev]);
+    setTask("");
+    setIsAddingTask(false);
+  };
+
+  return (
+    <div className="w-full relative bg-(--background-color) min-h-screen flex flex-col overflow-hidden font-bubblegum">
+      {/* <Navbar /> */}
+
+      {/* Toolbar */}
+      <div className="w-full border-b border-b-black p-2 md:pt-4 md:pb-2 flex items-center justify-between gap-3 px-2 md:px-4">
+        <Link
+          href="/"
+          className="flex items-center gap-2 font-bold hover:scale-105 transition-transform"
+        >
+          <ArrowLeft size={20} />
+          <span>Back</span>
+        </Link>
+        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+          <div className="inline-flex items-center justify-center rounded-xl md:px-2 md:py-1">
+            <button
+              onClick={() => editor?.chain().focus().undo().run()}
+              className="p-1 hover:bg-black/5 rounded-full"
+            >
+              <Undo size={18} />
+            </button>
+            <button
+              onClick={() => editor?.chain().focus().redo().run()}
+              className="p-1 hover:bg-black/5 rounded-full"
+            >
+              <Redo size={18} />
+            </button>
+          </div>
+          <div className="h-6 w-px bg-black/20 mx-1" />
+          <button
+            onClick={() => editor?.chain().focus().toggleBold().run()}
+            className="px-2 font-bold hover:text-(--red-background)"
+          >
+            B
+          </button>
+          <button
+            onClick={() => editor?.chain().focus().toggleItalic().run()}
+            className="px-2 italic hover:text-(--red-background)"
+          >
+            I
+          </button>
+          <button
+            onClick={() => editor?.chain().focus().toggleHighlight().run()}
+            className="px-2 hover:text-(--red-background)"
+          >
+            Highlight
+          </button>
+        </div>
+      </div>
+
+      <div className="w-full max-w-4xl mx-auto px-4 pt-8">
+        <h1 className="text-4xl md:text-5xl font-bold mb-8 uppercase border-b-4 border-black inline-block">
+          {cardTitle || id}
+        </h1>
+
+        <div className="editorContent min-h-[50vh] prose prose-sm md:prose-lg max-w-none border-t-2 border-black/10 pt-6">
+          <EditorContent editor={editor} className="outline-none border-none cursor-text" />
+        </div>
+
+        <div className="fixed bottom-10 left-1/2 -translate-x-1/2">
+          <button
+            onClick={saveToLocalStorage}
+            disabled={isLoading}
+            className="px-8 py-3 rounded-full font-bold uppercase bg-black text-white shadow-[6px_6px_0px_0px_rgba(0,0,0,0.3)] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all flex items-center gap-2"
+          >
+            {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+            {isLoading ? "Saving..." : showSuccess ? "SAVED!" : "SAVE"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

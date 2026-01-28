@@ -97,17 +97,17 @@ export default function Navbar() {
           {/* User Profile Section */}
           <div className="flex gap-2 md:mb-4">
            <div className="w-20 h-20 rounded-full flex items-center justify-center border-3 border-transparent">
-                {session?.user?.image ? (
+                {/* {!session?.user?.image ? (
                   <img
                     src={session.user.image}
                     alt={session.user.name ?? "User profile"}
                     className="rounded-full border-white border-3"
                   />
-                ) : (
+                ) : ( */}
                   <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full flex items-center justify-center">
                   <img src="/images/alternateUserImage.png" alt="" className="rounded-full w-full" />
                   </div>
-                )}
+                {/* )} */}
               </div>
             <div className="flex flex-col justify-center">
               <h3 className="font-bold text-lg text-foreground">
@@ -126,6 +126,19 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 rounded-xl transition-all cursor-pointer ${
                 pathname === "/"
+                  ? "bg-[#FD8A6B] text-white border-2  border-[#FD8A6B]"
+                  : "text-black border-2 border-black hover:border-[#FD8A6B] hover:bg-[#FD8A6B] hover:text-white"
+              }`}
+            >
+              <button className="w-full py-2 px-4 rounded-xl transition-all text-sm font-bold cursor-pointer">
+                home
+              </button>
+            </Link>  
+            <Link
+              href="/day"
+              onClick={() => setIsOpen(false)}
+              className={`flex items-center gap-3 rounded-xl transition-all cursor-pointer ${
+                pathname === "/day"
                   ? "bg-[#FD8A6B] text-white border-2  border-[#FD8A6B]"
                   : "text-black border-2 border-black hover:border-[#FD8A6B] hover:bg-[#FD8A6B] hover:text-white"
               }`}

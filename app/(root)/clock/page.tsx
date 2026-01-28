@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import LoginPage from "../components/LoginPage";
+import LoginPage from "../../components/LoginPage";
 import { useSession } from "next-auth/react";
 import Cookies from "js-cookie";
-import Home from "../pages/Home";
-import YourDay from "../pages/YourDay";
+import Soon from "@/app/components/Soon";
 
 export default function LoginButton() {
   const { data: session } = useSession();
@@ -28,5 +27,5 @@ export default function LoginButton() {
     return <LoginPage />;
   }
 
-  return <Home />;
+  return <Soon />;
 }
