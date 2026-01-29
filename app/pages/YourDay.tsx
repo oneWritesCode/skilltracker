@@ -165,9 +165,9 @@ export default function Editor() {
 
   return (
     <div className="w-full relative bg-(--background-color) min-h-screen flex items-center justify- ovreflow-hidden flex-col overflow-hidden font-bubblegum">
-    <Navbar/>
+      <Navbar />
       {/* editor toolbar */}
-      <div className="w-full border-b border-b-black relative top-0 p-2 md:pt-4 md:pb-2 flex items-center justify-end overflow-x-auto z-10 scrollbar-hide md:gap-1 px-2 md:px-4 ">
+      <div className="w-full border-b border-b-(--text-color) relative top-0 p-2 md:pt-4 md:pb-2 flex items-center justify-end overflow-x-auto z-10 scrollbar-hide md:gap-1 px-2 md:px-4 text-(--text-color)">
         <div className="inline-flex items-center justify-center rounded-xl md:px-2 md:py-1 md:gap-1 mr-2 md:px-3 md:mr-3 ">
           {/* undo button */}
           <button
@@ -256,7 +256,7 @@ export default function Editor() {
       </div>
 
       {/* page and the content */}
-      <div className="w-full max-w-full px-2 md:px-4 pt-4">
+      <div className="w-full max-w-full px-2 md:px-4 pt-4 text-(--text-color)">
         <div className="rounded-xl w-full flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
           <p className="capitalize text-sm md:text-3xl text-left w-full">
             your tasks
@@ -267,12 +267,12 @@ export default function Editor() {
           {tasksDone.map((singleTask, idx) => (
             <div
               key={idx}
-              className="px-2 py-1 bg-[#000] text-white rounded-2xl flex items-center gap-2"
+              className="px-2 py-1 bg-(--text-color) text-(--background-color) rounded-2xl flex items-center gap-2"
             >
               <span>{singleTask.title}</span>
               <button
                 onClick={() => removeTask(idx)}
-                className="text-white cursor-pointer hover:bg-white/20 rounded-full p-0.5"
+                className="cursor-pointer rounded-full p-0.5"
               >
                 <X size={14} />
               </button>
@@ -284,14 +284,14 @@ export default function Editor() {
               <input
                 type="text"
                 autoFocus
-                className="w-32 ring-2 ring-neutral-800 shadow-sm shadow-neutral-400 rounded-xl px-2 py-0.5 outline-none bg-transparent text-black text-sm m-1"
+                className="w-32 ring-2 ring-(--text-color)/50 shadow-sm shadow-(--text-color)/20 rounded-xl px-2 py-0.5 outline-none bg-transparent text-(--text-color) text-sm m-1"
                 value={task}
                 onChange={(e) => setTask(e.target.value)}
                 onBlur={() => !task && setIsAddingTask(false)}
               />
               <button
                 type="submit"
-                className="bg-black text-white rounded-xl px-3 py-0.5 uppercase cursor-pointer text-sm font-bold transition-colors"
+                className="bg-(--text-color) text-(--background-color) rounded-xl px-3 py-0.5 uppercase cursor-pointer text-sm font-bold transition-colors"
                 onMouseDown={(e) => e.preventDefault()}
               >
                 add
@@ -299,7 +299,7 @@ export default function Editor() {
               <button
                 type="button"
                 onClick={() => setIsAddingTask(false)}
-                className="p-0.5 rounded-full text-black transition-colors cursor-pointer hover:bg-black hover:text-white"
+                className="p-0.5 rounded-full text-(--text-color) transition-colors cursor-pointer hover:bg-(--text-color) hover:text-(--background-color)"
               >
                 <X size={16} />
               </button>
@@ -307,10 +307,10 @@ export default function Editor() {
           ) : (
             <button
               onClick={() => setIsAddingTask(true)}
-              className="p-1.5 rounded-full text-black transition-colors cursor-pointer border border-black hover:bg-black hover:text-white"
+              className="p-1.5 rounded-full text-(--text-color) transition-colors cursor-pointer border border-(--text-color) hover:bg-(--text-color) hover:text-(--background-color)"
               title="Add task"
             >
-              <Plus size={16} fontWeight={"bold"}/>
+              <Plus size={16} fontWeight={"bold"} />
             </button>
           )}
         </div>
@@ -319,9 +319,9 @@ export default function Editor() {
         <div className="mt-10 text-sm">
           <div className="relative w-full">
             {/* editor content */}
-            <div className="max-w-4x w-full flex items-start justify-center px-2 text-">
+            <div className="max-w-4x w-full flex items-start justify-center px-2 text-(--text-color)">
               <div
-                className="editorContent w-full py rounded-xl prose prose-sm md:prose-lg leading-relaxed "
+                className="editorContent w-full py rounded-xl prose prose-sm md:prose-lg leading-relaxed text-(--text-color)"
                 onClick={() => editor?.commands.focus()}
               >
                 <EditorContent
@@ -342,10 +342,10 @@ export default function Editor() {
           <button
             onClick={SaveToDb}
             disabled={isLoading}
-            className="px-6 py-2 rounded-3xl font-bold capitalize bg-black text-white cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-6 py-2 rounded-3xl font-bold capitalize bg-(--text-color) text-(--background-color) cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed flex items-center gap-2 mb-4"
           >
             {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}
-            {isLoading ? "Saving..." : showSuccess? "Submitted!":"submit"}
+            {isLoading ? "Saving..." : showSuccess ? "Submitted!" : "submit"}
           </button>
         </div>
       </div>

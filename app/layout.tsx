@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${bubblegumSans.variable} ${FunnelSans.variable} antialiased`}
+        className={`${bubblegumSans.variable} ${FunnelSans.variable} text-(--text-color) antialiased`}
       >
         <Providers>
           <Loading />

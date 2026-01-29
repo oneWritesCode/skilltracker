@@ -45,17 +45,17 @@ export default function Navbar() {
       {/* Mobile Hamburger Trigger - Visible when closed */}
       <button
         onClick={toggleNavbar}
-        className={`fixed top-3 left-3 md:top-4 md:left-4 p-1 group rounded-md backdrop-blur-sm hover:-gray-900/20 transition-all duration-500 cursor-pointer flex flex-col gap- z-1000 ${isOpen ? "opacity-0" : "opacity-100"}`}
+        className={`fixed top-3 left-3 md:top-4 md:left-4 p-1 group rounded-md backdrop-blur-sm hover:bg-white/10 transition-all duration-500 cursor-pointer flex flex-col gap- z-1000 ${isOpen ? "opacity-0" : "opacity-100"}`}
         aria-label="Open Menu"
       >
         <div
-          className={`w-2 border-2 rounded-full border-black hover group-hover:w-4 transition-all duration-400 mb-0.5`}
+          className={`w-2 border-2 rounded-full border-(--text-color) hover group-hover:w-4 transition-all duration-400 mb-0.5`}
         ></div>
         <div
-          className={`w-4 border-2 rounded-full border-black hover group-hover:w-3 transition-all duration-400 mb-0.5`}
+          className={`w-4 border-2 rounded-full border-(--text-color) hover group-hover:w-3 transition-all duration-400 mb-0.5`}
         ></div>
         <div
-          className={`w-3 border-2 rounded-full border-black hover group-hover:w-5 transition-all duration-400 `}
+          className={`w-3 border-2 rounded-full border-(--text-color) hover group-hover:w-5 transition-all duration-400 `}
         ></div>
       </button>
 
@@ -71,14 +71,14 @@ export default function Navbar() {
 
       {/* Sidebar */}
       <nav
-        className={`fixed top-0 left-0 h-full max-w-full w-80 bg-(--light-background) shadow-2xl z-50 transform transition-transform duration-500 ease-in-out text-foreground  font-funnelsans ${
+        className={`fixed top-0 left-0 h-full max-w-full w-80 bg-(--nav-background-color) shadow-2xl z-50 transform transition-transform duration-500 ease-in-out text-foreground  font-bubblegum ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full p-4 md:p-6">
           {/* Header */}
           <div className="flex items-center justify-between mb-4 md:mb-8">
-            <h2 className="text-xl font-bold text-[#FA5C5C] uppercase">
+            <h2 className="text-xl font-bold text-(--text-color) uppercase">
               SkillTracker
             </h2>
             <button
@@ -86,29 +86,33 @@ export default function Navbar() {
               className="p-3 group relative cursor-pointer"
             >
               <div
-                className={`w-4 group-hover:w-3 group-hover:-rotate-45 group-hover:top-2 group-hover:left-1 absolute right-1 top-2.5 rotate-45 border-2 rounded-full border-black hover transition-all duration-400 `}
+                className={`w-4 group-hover:w-3 group-hover:-rotate-45 group-hover:top-2 group-hover:left-1 absolute right-1 top-2.5 rotate-45 border-2 rounded-full border-(--text-color) hover transition-all duration-400 `}
               ></div>
               <div
-                className={`w-4 group-hover:w-3 group-hover:rotate-45 group-hover:top-4 group-hover:left-1 absolute right-1 top-2.5 -rotate-45 border-2 rounded-full border-black hover transition-all duration-400 `}
+                className={`w-4 group-hover:w-3 group-hover:rotate-45 group-hover:top-4 group-hover:left-1 absolute right-1 top-2.5 -rotate-45 border-2 rounded-full border-(--text-color) hover transition-all duration-400 `}
               ></div>
             </button>
           </div>
 
           {/* User Profile Section */}
           <div className="flex gap-2 md:mb-4">
-           <div className="w-20 h-20 rounded-full flex items-center justify-center border-3 border-transparent">
-                {/* {!session?.user?.image ? (
+            <div className="w-20 h-20 rounded-full flex items-center justify-center border-3 border-transparent">
+              {/* {!session?.user?.image ? (
                   <img
                     src={session.user.image}
                     alt={session.user.name ?? "User profile"}
                     className="rounded-full border-white border-3"
                   />
                 ) : ( */}
-                  <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full flex items-center justify-center">
-                  <img src="/images/alternateUserImage.png" alt="" className="rounded-full w-full" />
-                  </div>
-                {/* )} */}
+              <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full flex items-center justify-center">
+                <img
+                  src="/images/alternateUserImageWhite.png"
+                  // src="/images/alternateUserImage.png"
+                  className="rounded-full w-full"
+                />
               </div>
+              {/* )} */}
+            </div>
             <div className="flex flex-col justify-center">
               <h3 className="font-bold text-lg text-foreground">
                 {session?.user?.name || optimisticName}
@@ -126,21 +130,21 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 rounded-xl transition-all cursor-pointer ${
                 pathname === "/"
-                  ? "bg-[#FD8A6B] text-white border-2  border-[#FD8A6B]"
-                  : "text-black border-2 border-black hover:border-[#FD8A6B] hover:bg-[#FD8A6B] hover:text-white"
+                 ? "bg-(--light-background) text-(--background-color) border-2  border-(--light-background)"
+                  : "text-(--text-color) border-2 border-(--text-color) hover:border-(--light-background) hover:bg-(--light-background) hover:text-(--background-color)"
               }`}
             >
               <button className="w-full py-2 px-4 rounded-xl transition-all text-sm font-bold cursor-pointer">
                 home
               </button>
-            </Link>  
+            </Link>
             <Link
               href="/day"
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 rounded-xl transition-all cursor-pointer ${
                 pathname === "/day"
-                  ? "bg-[#FD8A6B] text-white border-2  border-[#FD8A6B]"
-                  : "text-black border-2 border-black hover:border-[#FD8A6B] hover:bg-[#FD8A6B] hover:text-white"
+                  ? "bg-(--light-background) text-(--background-color) border-2  border-(--light-background)"
+                  : "text-(--text-color) border-2 border-(--text-color) hover:border-(--light-background) hover:bg-(--light-background) hover:text-(--background-color)"
               }`}
             >
               <button className="w-full py-2 px-4 rounded-xl transition-all text-sm font-bold cursor-pointer">
@@ -153,8 +157,8 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 rounded-xl transition-all cursor-pointer ${
                 pathname === "/profile"
-                  ? "bg-[#FD8A6B] text-white border-2  border-[#FD8A6B]"
-                  : "text-black border-2 border-black hover:border-[#FD8A6B] hover:bg-[#FD8A6B] hover:text-white"
+                  ? "bg-(--light-background) text-(--background-color) border-2  border-(--light-background)"
+                  : "text-(--text-color) border-2 border-(--text-color) hover:border-(--light-background) hover:bg-(--light-background) hover:text-(--background-color)"
               }`}
             >
               <button className="w-full py-2 px-4 rounded-xl transition-all text-sm font-bold cursor-pointer">

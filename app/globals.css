@@ -1,35 +1,95 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background-color: #000;
+  --background: #fff;
+  --light-background: #000;
+  --red-background: #fff;
+  --text-color: #fff;
+  --foreground: #ffffff;
+  --accent-blue: #FD8A6B;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background: var(--background-color);
   --color-foreground: var(--foreground);
   --color-primary: var(--accent-blue);
-  --font-funnelsans: var(--font-bubblegum-sans) ;
+  --color-light-bg: var(--light-background);
+  --color-card-bg: var(--red-background);
+  --color-text-main: var(--text-color);
+  --font-funnelsans: var(--font-funnel-sans);
   --font-bubblegum: var(--font-bubblegum-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #FBEF76;
-    --foreground: #171717;
-    /* --background-color: #FA5C5C; */
-    --background-color: #FBEF76;
-    --light-background: #FBEF76;
-    --red-background: #FD8A6B;
-    --accent-blue: #FD8A6B;
-  }
+
+/* Default Theme (Rose) */
+[data-theme='rose'] {
+  --nav-background-color: #FA5C5C;
+  --background-color: #FA5C5C;
+  --background: #FA5C5C;
+  --light-background: #FBEF76;
+  --red-background: #FD8A6B;
+  --text-color: #000;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --accent-blue: #FD8A6B;
+[data-theme='yellow'] {
+  --nav-background-color: #FBEF76;
+  --background-color: #FBEF76;
+  --background: #FBEF76;
+  --light-background: #FA5C5C;
+  --red-background: #FD8A6B;
+  --text-color: #fff;
 }
+
+[data-theme='black'] {
+  --nav-background-color: #0e0e0e;
+  --background-color: #000;
+  --background: #000;
+  --light-background: #fff;
+  --red-background: #fff;
+  --text-color: #fff;
+}
+
+/* Sky Theme */
+[data-theme='sky'] {
+  --nav-background-color: #60A5FA;
+  --background-color: #60A5FA;
+  --background: #60A5FA;
+  --light-background: #DBEAFE;
+  --red-background: #93C5FD;
+  --text-color: #000;
+}
+
+/* Amber Theme */
+[data-theme='amber'] {
+  --nav-background-color: #F59E0B;
+  --background-color: #F59E0B;
+  --background: #F59E0B;
+  --light-background: #FEF3C7;
+  --red-background: #FBBF24;
+  --text-color: #000;
+}
+
+/* Emerald Theme */
+[data-theme='emerald'] {
+  --nav-background-color: #10B981;
+  --background-color: #10B981;
+  --background: #10B981;
+  --light-background: #D1FAE5;
+  --red-background: #34D399;
+  --text-color: #000;
+}
+
+/* Violet Theme */
+[data-theme='violet'] {
+  --nav-background-color: #8B5CF6;
+  --background-color: #8B5CF6;
+  --background: #8B5CF6;
+  --light-background: #EDE9FE;
+  --red-background: #A78BFA;
+  --text-color: #000;
+}
+
 
 /* body {
   background: var(--background);

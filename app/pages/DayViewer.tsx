@@ -106,7 +106,7 @@ export default function DayViewer({ date }: DayViewerProps) {
 
   return (
     <div className="w-full relative bg-(--background-color) min-h-screen flex items-center flex-col overflow-hidden font-bubblegum">
-      <div className="w-full border border-b-black relative top-0 p-2 w-full flex items-center md:justify-end overflow-x-auto z-10 scrollbar-hide md:gap-1  pointer-events-none opacity-70 text-black">
+      <div className="w-full border border-b-black relative top-0 p-2 w-full flex items-center md:justify-end overflow-x-auto z-10 scrollbar-hide md:gap-1  pointer-events-none opacity-70 text-(--text-color)">
           <div className="inline-flex items-center justify-center rounded-xl px-2 py-1 md:gap-1 mr-2 md:px-3 md:mr-3">
             {/* undo button */}
             <button
@@ -219,7 +219,7 @@ export default function DayViewer({ date }: DayViewerProps) {
           <div className="relative w-full">
       
             <div className="max-w-4x w-full flex items-start justify-center px-2">
-              <div className="editorContent w-full text-black prose prose-sm md:prose-lg leading-relaxed pointer-events-none">
+              <div className="editorContent w-full text-(--text-color) prose prose-sm md:prose-lg leading-relaxed pointer-events-none">
                 <EditorContent
                   editor={editor}
                   className="outline-none min-h-[40vh] cursor-text"

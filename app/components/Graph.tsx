@@ -57,8 +57,8 @@ export default function Graph() {
   }
 
   const getColor = (count: number) => {
-    if (count === 0) return "bg-(--background-color) border-gray-800/70";
-    if (count <= 2) return "bg-(--red-background)/30 border-(--red-background)/10";
+    if (count === 0) return "bg-(--background-color) border-gray-300/80";
+    if (count <= 2) return "bg-(--red-background)/30 border-(--light-background)/10";
     if (count <= 4) return "bg-(--red-background)/50 border-(--red-background)/20";
     if (count <= 6) return "bg-(--red-background)/70 border-(--red-background)/30";
     return "bg-(--red-background) border-(--red-background)";
@@ -99,14 +99,14 @@ export default function Graph() {
   }
 
   return (
-    <div className="w-full mt-2 md:mt-5 borderborder-gray-800 rounded-md md:rounded-xl backdrop-blur-sm relative overflow-hidden">
-      <h3 className="text-gray-700 mb-3 text-sm font-extrabold uppercase tracking-wider">
+    <div className="w-full mt-2 md:mt-5 rounded-md md:rounded-xl backdrop-blur-sm relative overflow-hidden">
+      <h3 className="text-gray-300 mb-3 text-sm font-extrabold uppercase tracking-wider">
         Activity Graph
       </h3>
 
       <div className="flex gap-2">
         {/* Day Labels (Left Axis) */}
-        <div className="grid grid-rows-7 gap-1 text-[10px] text-gray-700 font-bold h-full pt-[20px]">
+        <div className="grid grid-rows-7 gap-1 text-[10px] text-gray-300 font-bold h-full pt-[20px]">
           {/* pt-5 to align with the grid below the month headers */}
           <span className="h-3 mt-px flex items-center">Sun</span>
           <span className="h-3 flex items-center">Mon</span>
@@ -118,9 +118,9 @@ export default function Graph() {
         </div>
 
         {/* Graph + Month Labels */}
-        <div className="flex flex-col relative overflow-hidde overflow-x-auto pb-2 scrollbar-hide [&::-webkit-scrollbar]:w-2">
+        <div className="flex flex-col relative overflow-x-auto pb-2 scrollbar-hide [&::-webkit-scrollbar]:w-2">
           {/* Month Labels (Top Axis) */}
-          <div className="w-full flex text-[12px] text-gray-700 mb-2 h-3 font-bold relative left-0">
+          <div className="w-full flex text-[12px] text-gray-300 mb-2 h-3 font-bold relative left-0">
             {weeks.map((week, i) => (
               <div
                 key={i}
