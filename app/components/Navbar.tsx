@@ -71,7 +71,7 @@ export default function Navbar() {
 
       {/* Sidebar */}
       <nav
-        className={`fixed top-0 left-0 h-full max-w-full w-80 bg-(--nav-background-color) shadow-2xl z-50 transform transition-transform duration-500 ease-in-out text-foreground  font-bubblegum ${
+        className={`fixed top-0 left-0 h-full max-w-full w-80 bg-(--nav-background-color) bg-black shadow-2xl z-50 transform transition-transform duration-500 ease-in-out text-foreground  font-bubblegum ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
