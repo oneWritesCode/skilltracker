@@ -130,7 +130,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 rounded-xl transition-all cursor-pointer ${
                 pathname === "/"
-                 ? "bg-(--light-background) text-(--background-color) border-2  border-(--light-background)"
+                 ? "bg-(--light-background) bg-white hover:bg-white text-(--background-color) border-2  border-(--light-background)"
                   : "text-(--text-color) border-2 border-(--text-color) hover:border-(--light-background) hover:bg-(--light-background) hover:text-(--background-color)"
               }`}
             >
@@ -143,7 +143,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 rounded-xl transition-all cursor-pointer ${
                 pathname === "/day"
-                  ? "bg-(--light-background) text-(--background-color) border-2  border-(--light-background)"
+                  ? "bg-(--light-background) bg-white hover:bg-white text-(--background-color) border-2  border-(--light-background)"
                   : "text-(--text-color) border-2 border-(--text-color) hover:border-(--light-background) hover:bg-(--light-background) hover:text-(--background-color)"
               }`}
             >
@@ -157,7 +157,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className={`flex items-center gap-3 rounded-xl transition-all cursor-pointer ${
                 pathname === "/profile"
-                  ? "bg-(--light-background) text-(--background-color) border-2  border-(--light-background)"
+                  ? "bg-(--light-background) bg-white hover:bg-white text-(--background-color) border-2  border-(--light-background)"
                   : "text-(--text-color) border-2 border-(--text-color) hover:border-(--light-background) hover:bg-(--light-background) hover:text-(--background-color)"
               }`}
             >
