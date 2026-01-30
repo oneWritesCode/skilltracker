@@ -4,9 +4,6 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 
 type Theme =
   | "rose"
-  | "sky"
-  | "amber"
-  | "emerald"
   | "violet"
   | "black"
   | "yellow";

@@ -3,11 +3,14 @@ import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import Todos from "../components/Todos";
+import { useTheme } from "@/app/context/ThemeContext";
 import Graph from "../components/Graph";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
+import classnames from "classnames";
 
 function Landing() {
+  const { theme } = useTheme();
   const { data: session } = useSession();
   const [optimisticEmail, setOptimisticEmail] = useState<string | null>(null);
   const [optimisticName, setOptimisticName] = useState<string | null>(null);
@@ -24,7 +27,12 @@ function Landing() {
   }, []);
 
   return (
-    <div className="relative w-full min-h-screen bg-(--background-color) text-foreground md:pt-0 pt-6">
+    <div
+      className={classnames(
+        "relative w-full min-h-screen bg-(--background-color) text-foreground md:pt-0 pt-6 font-bubblegum",
+        { "text-black": theme !== "black", "text-white": theme === "black" },
+      )}
+    >
       <div className="px-2 md:px-10 py-4 flex w-full items-center justify-center">
         <div className="w-full max-w-4xl">
           {/* <InstallPWA /> */}
@@ -40,20 +48,30 @@ function Landing() {
                     className="rounded-full border-white border-3"
                   />
                 ) : ( */}
-                  <div className="min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full flex items-center justify-center">
-                    <img
-                      src="/images/alternateUserImageWhite.png"
-                      // src="/images/alternateUserImage.png"
-                      className="rounded-full h-full"
-                    />
-                  </div>
+                <div
+                  className={classnames(
+                    "min-w-16 min-h-16 md:min-w-22 md:min-h-22 rounded-full flex items-center justify-center overflow-hidden",
+                  )}
+                >
+                  <img
+                    src={
+                      theme === "black"
+                        ? "/images/alternateUserImageWhite.png"
+                        : theme === "violet"
+                          ? "/images/alternateUserImageBlack.png"
+                          : "/images/alternateUserImage.png"
+                    }
+                    alt="User"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 {/* )} */}
               </div>
               <div className="flex flex-col justify-center">
                 <h3 className="font-bold text-lg text-foreground">
                   {session?.user?.name || optimisticName}
                 </h3>
-                <p className="text-xs font-semibold text-muted-foreground">
+                <p className="text-xs font-semibold text-foreground/70">
                   {session?.user?.email || optimisticEmail}
                 </p>
               </div>
@@ -73,7 +91,14 @@ function Landing() {
         <div className="max-w-4xl mx-auto pb-10">
           <div className="mt-12 md:mt-16 pt-8 border-t-2 border-black/10 flex flex-col mdflex-row justify-between items-center gap-4">
             <p className="text-sm font-black uppercase">
-              Created by <Link href="d33pak.space" className="text-(--light-background) underline">Deepak</Link> @2026
+              Created by{" "}
+              <Link
+                href="d33pak.space"
+                className="text-(--light-background) underline"
+              >
+                Deepak
+              </Link>{" "}
+              @2026
             </p>
             <p className="text-xs font-bold text-muted-foreground uppercase opacity-50">
               © 2026 SkillTracker. All rights reserved.

@@ -2,6 +2,8 @@
 
 import { X, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
+import classnames from "classnames";
+import { useTheme } from "../context/ThemeContext";
 
 type setSkillsType = {
   skillName: string;
@@ -18,6 +20,7 @@ export default function skills() {
   const [skills, setSkills] = useState<setSkillsType[]>([]);
   const [showInput, setShowInput] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const { theme } = useTheme();
   // const { isTodoOpen } = useOpenTodo();
 
   const fetchedSkills = async () => {
@@ -85,7 +88,14 @@ export default function skills() {
           {skills.map((skill) => (
             <span
               key={skill.id}
-              className="flex gap-1 md:gap-2 xl:gap-4 items-center bg-(--red-background) p-1 px-2 rounded-md md:rounded-xl text-xs md:text-sm font-bold uppercase text-black"
+              className={classnames(
+                "flex gap-1 md:gap-2 xl:gap-4 items-center bg-(--red-background) p-1 px-2 rounded-md md:rounded-xl text-xs md:text-sm font-bold uppercase border-2 border-(--text-color) text-black transition-all",
+                "shadow-[3px_3px_0px_0px_rgba(0,0,0,0.2)] hover:shadow-none hover:translate-x-0.5 hover:translate-y-0.5",
+                {
+                  "shadow-[3px_3px_0px_0px_rgba(255,255,255,0.2)]":
+                    theme === "black",
+                },
+              )}
             >
               {skill.skillName}
               <button

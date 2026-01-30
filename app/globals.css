@@ -12,7 +12,7 @@
 
 @theme inline {
   --color-background: var(--background-color);
-  --color-foreground: var(--foreground);
+  --color-foreground: var(--text-color);
   --color-primary: var(--accent-blue);
   --color-light-bg: var(--light-background);
   --color-card-bg: var(--red-background);
@@ -38,7 +38,7 @@
   --background: #FBEF76;
   --light-background: #FA5C5C;
   --red-background: #FD8A6B;
-  --text-color: #fff;
+  --text-color: #000;
 }
 
 [data-theme='black'] {
@@ -48,36 +48,6 @@
   --light-background: #fff;
   --red-background: #fff;
   --text-color: #fff;
-}
-
-/* Sky Theme */
-[data-theme='sky'] {
-  --nav-background-color: #60A5FA;
-  --background-color: #60A5FA;
-  --background: #60A5FA;
-  --light-background: #DBEAFE;
-  --red-background: #93C5FD;
-  --text-color: #000;
-}
-
-/* Amber Theme */
-[data-theme='amber'] {
-  --nav-background-color: #F59E0B;
-  --background-color: #F59E0B;
-  --background: #F59E0B;
-  --light-background: #FEF3C7;
-  --red-background: #FBBF24;
-  --text-color: #000;
-}
-
-/* Emerald Theme */
-[data-theme='emerald'] {
-  --nav-background-color: #10B981;
-  --background-color: #10B981;
-  --background: #10B981;
-  --light-background: #D1FAE5;
-  --red-background: #34D399;
-  --text-color: #000;
 }
 
 /* Violet Theme */

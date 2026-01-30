@@ -7,7 +7,11 @@ export default function Footer() {
   const currentYear = 2026; // As requested: @2026
 
   const socialLinks = [
-    { name: "Github", icon: <Github size={20} />, href: "https://github.com/onewritescode" },
+    {
+      name: "Github",
+      icon: <Github size={20} />,
+      href: "https://github.com/onewritescode",
+    },
     {
       name: "Twitter",
       icon: <Twitter size={20} />,
