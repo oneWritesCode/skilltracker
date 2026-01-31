@@ -17,17 +17,17 @@ function LoginPage() {
           <img
             src="/images/alternateUserImageGirl.png"
             alt=""
-            className="absolute rounded-full -rotate-40 -translate-x-13 -translate-y-31 sm:-translate-x-30 sm:-translate-y-40 z-10"
+            className="absolute rounded-full -rotate-40 scale-110 sm:scale-100  -translate-x-13 -translate-y-25 sm:-translate-x-25 sm:-translate-y-35 z-10"
           />{" "} 
           <img
             src="/images/alternateUserImageL.png"
             alt=""
-            className="absolute scale-50 -rotate- translate-x-20 -translate-y-32 sm:translate-x-25 sm:-translate-y-54 z-10"
+            className="absolute scale:70 sm:scale-50 -rotate- translate-x-20 -translate-y-32 sm:translate-x-25 sm:-translate-y-44 z-10"
           />
           <img
             src="/images/luffy.png"
             alt=""
-            className="absolute rounded-full scale-80 rotate-30 -translate-x-22 translate-y-6 sm:-translate-x-38 sm:translate-y-24 z-10"
+            className="absolute rounded-full sm:scale-100 rotate-30 -translate-x-18 translate-y-8 sm:-translate-x-30 sm:translate-y-20 z-10"
           />
         </div>
 
@@ -36,7 +36,7 @@ function LoginPage() {
           onClick={() => signIn("google")}
         >
           <img src="/images/GoogleLogo.png" alt="logo" className="w-6 h-6" />
-          <span className="transition-all text-black text-xl">
+          <span className="transition-all text-black sm:text-xl">
             Sign in with Google
           </span>
         </button>
