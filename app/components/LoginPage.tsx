@@ -5,38 +5,29 @@ import InstallPWA from "./InstallPWA";
 
 function LoginPage() {
   return (
-    <div className="w-full min-h-screen bg-[#8B5CF6] flex items-center justify-center flex-col text-white">
-      {/* <img
-        src="/images/alternateUserImageL.png"
-        alt=""
-        className="fixed bottom-0 right-0"
-      /> */}
+    <div className="w-full min-h-screen bg-[#8B5CF6] flex items-center justify-center flex-col text-white overflow-hidden">
+     
       <div className="px-10 py-4 flex flex-col w-full items-center gap-5 justify-center font-bubblegum font-light">
-        <div className="relative flex">
+        <div className="relative flex borde">
           <img
             src="/images/alternateUserImageBlack.png"
             alt=""
-            className="rounded-full rotate-40 translate-x-10 z-10"
+            className="rounded-full rotate-40 translate-x-15 sm:translate-x-25 z-10"
           />{" "}
           <img
             src="/images/alternateUserImageGirl.png"
             alt=""
-            className="absolute rounded-full -rotate-40 -translate-x-40 -translate-y-40 z-10"
+            className="absolute rounded-full -rotate-40 -translate-x-13 -translate-y-31 sm:-translate-x-30 sm:-translate-y-40 z-10"
           />{" "} 
           <img
             src="/images/alternateUserImageL.png"
             alt=""
-            className="absolute scale-50 -rotate- translate-x-10 -translate-y-54 z-10"
+            className="absolute scale-50 -rotate- translate-x-20 -translate-y-32 sm:translate-x-25 sm:-translate-y-54 z-10"
           />
-          {/* <img
-            src="/images/alternateUserImageWhite.png"
-            alt=""
-            className="absolute rounded-full scale-50 rotate-20 translate-x-15 -translate-y-40 z-10"
-          />{" "} */}
           <img
             src="/images/luffy.png"
             alt=""
-            className="absolute rounded-full scale-80 rotate-30 -translate-x-48 translate-y-24 z-10"
+            className="absolute rounded-full scale-80 rotate-30 -translate-x-22 translate-y-6 sm:-translate-x-38 sm:translate-y-24 z-10"
           />
         </div>
 
