@@ -12,7 +12,7 @@ interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
-export default function InstallPWA() {
+export default function InstallPWA({forLogin}:{forLogin?:boolean}) {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallButton, setShowInstallButton] = useState(false);
@@ -82,10 +82,22 @@ export default function InstallPWA() {
     setShowInstallButton(false);
   };
 
+  if(forLogin){
+     return (
+    <button
+      onClick={handleInstallClick}
+      className="pl-2 pr-10 py-2 rounded-xl border-3 border-black bg-black cursor-pointer group hover:shadow-[3px_3px_0px_0px_rgba(0,0,0,0.3)] shadow-[6px_6px_2px_3px_rgba(0,0,0,0.3)] capitalize flex items-center gap-4 font-bold transition-all duration-100 text-white"
+    >
+      <Download className="w-5 h-5" />
+      <span className="transition-all text-xl">Install App</span>
+    </button>
+  );
+  }
   // Don't show if already installed or no prompt available
   if (isInstalled || !showInstallButton) {
     return null;
   }
+
 
   return (
     <button
